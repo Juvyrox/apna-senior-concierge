@@ -1,0 +1,125 @@
+---
+import { site } from '../lib/site';
+import '../styles/fonts.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Path-relative page image; defaults to the branded social card. */
+  image?: string;
+  /** Set false on legal/utility pages if you prefer them out of search. */
+  noindex?: boolean;
+}
+
+const {
+  title = `${site.name} — Companions who speak your parents’ language`,
+  description = site.description,
+  image = '/og-image.png',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  description: site.description,
+  url: Astro.site?.href,
+  email: site.email,
+  telephone: site.phone,
+  founder: { '@type': 'Person', name: site.founder },
+  areaServed: [site.region, ...site.cities.map((c) => `${c}, CA`)],
+  address: { '@type': 'PostalAddress', addressRegion: 'CA', addressCountry: 'US' },
+  openingHours: 'Mo-Sa 09:00-19:00',
+  priceRange: '$$',
+  image: ogImage,
+  slogan: site.tagline,
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex
+      ? <meta name="robots" content="noindex, follow" />
+      : <meta name="robots" content="index, follow, max-image-preview:large" />}
+    <meta name="theme-color" content="#f3f2f2" />
+    <meta name="author" content={site.founder} />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Preload the two primary latin faces used above the fold -->
+    <link rel="preload" href="/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    {site.plausibleDomain && (
+      <script
+        defer
+        data-domain={site.plausibleDomain}
+        src="https://plausible.io/js/script.js"
+      />
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+
+    <!-- Cookie / privacy notice (cookieless by default; honest, dismissible) -->
+    <div id="cookie-banner" class="cookie-banner" hidden>
+      <div class="cookie-banner__inner">
+        <p>
+          We keep this simple. Apna uses only what’s needed to run this site and,
+          if enabled, privacy-friendly analytics that set <strong>no advertising cookies</strong> and
+          don’t track you across the web. See our <a href="/privacy/">Privacy Policy</a>.
+        </p>
+        <div class="cookie-banner__actions">
+          <button type="button" class="btn btn-primary" id="cookie-ok">Okay</button>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        try {
+          var KEY = 'apna_cookie_ack_v1';
+          var el = document.getElementById('cookie-banner');
+          var ok = document.getElementById('cookie-ok');
+          if (!el || !ok) return;
+          if (!localStorage.getItem(KEY)) el.hidden = false;
+          ok.addEventListener('click', function () {
+            try { localStorage.setItem(KEY, '1'); } catch (e) {}
+            el.hidden = true;
+          });
+        } catch (e) { /* storage blocked: just leave banner hidden */ }
+      })();
+    </script>
+  </body>
+</html>
