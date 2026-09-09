@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../lib/site';
+const title = `Privacy Policy — ${site.name}`;
+const description = `How Apna Senior Concierge collects, uses and protects the information you share when you contact us.`;
+---
+<Layout title={title} description={description}>
+  <main id="main" class="legal">
+    <p style="margin:0 0 calc(1.2*var(--leading))"><a href="/">← Back to Apna Senior Concierge</a></p>
+
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated {site.lastUpdated}</p>
+
+    <p class="lead">Apna Senior Concierge respects the trust families place in us. We collect only what we need to call you back and arrange care, we don’t sell it, and we don’t ask for medical details through this website.</p>
+
+    <h2>Who we are</h2>
+    <p>Apna Senior Concierge (“Apna,” “we,” “us”) is a non-medical senior concierge and companion service based in the {site.region}, founded by {site.founder}. You can reach us any time at <a href={`mailto:${site.email}`}>{site.email}</a> or <a href={site.phoneHref}>{site.phone}</a>.</p>
+
+    <h2>What we collect</h2>
+    <p>When you fill in the “Book a free call” form, you choose to share things such as: who the support is for and their age, the city and general mobility, the days and hours you have in mind, what’s going unhandled, whether you’ve used a service like this before, your name, phone number, an optional email address, the best time and language for a call, and how you heard about us.</p>
+    <p>We deliberately ask you <strong>not</strong> to include medical details, diagnoses or health history in the form. Please keep those for the phone call.</p>
+    <p>We do not knowingly collect information from anyone under 18. This site and service are intended for adult family members and caregivers arranging support.</p>
+
+    <h2>How we use it</h2>
+    <ul>
+      <li>To call or email you back and talk through how we can help.</li>
+      <li>To plan a first visit and, if you go ahead, to arrange a standing schedule.</li>
+      <li>To improve how we explain and run the service.</li>
+    </ul>
+    <p>We use your information only for these purposes. We do not use it for unrelated marketing without your consent, and we never sell or rent it.</p>
+
+    <h2>How your booking form reaches us</h2>
+    <p>When you submit the “Book a free call” form, the details are sent to us so we can call you back. Depending on how the site is set up, that happens either by opening your own email app to send the message to us directly, or by passing it to a form-processing service we use as a provider to deliver it to our inbox. Either way, we receive only what you chose to enter, and we don’t attach advertising trackers to the form.</p>
+
+    <h2>Analytics and cookies</h2>
+    <p>We keep tracking to a minimum. If website analytics are enabled, we use a privacy-friendly, cookieless analytics tool that measures overall visits and does not set advertising cookies, build a profile of you, or track you across other websites. We do not run third-party advertising trackers. A small amount of storage in your browser may be used to remember that you’ve seen our cookie notice.</p>
+
+    <h2>Who we share it with</h2>
+    <p>We share your information only with the people at Apna who are helping arrange your care, and with service providers who make the website and our communication work (such as our hosting and email providers). We may disclose information if the law requires it. We do not sell your personal information.</p>
+
+    <h2>How long we keep it</h2>
+    <p>We keep enquiry details for as long as needed to follow up and, if you become a client, for as long as we provide service to your family plus any period required for our records and legal obligations. You can ask us to delete your information at any time.</p>
+
+    <h2>Your choices and rights</h2>
+    <p>You can ask us to see, correct or delete the information you’ve given us, or ask us to stop contacting you. Just email <a href={`mailto:${site.email}`}>{site.email}</a>. California residents have additional rights under the California Consumer Privacy Act (CCPA/CPRA), including the right to know, delete, and correct personal information, and the right not to be discriminated against for exercising these rights. Because we do not sell or “share” personal information for cross-context behavioral advertising, there is nothing to opt out of on that front.</p>
+
+    <h2>How we protect it</h2>
+    <p>This site is served over HTTPS, and we limit access to your information to the people who need it to help you. No method of transmission is perfectly secure, so please don’t send sensitive details like medical or financial information through the website form.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If we update this policy, we’ll change the date above. Material changes will be reflected here before they take effect.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about your privacy? Email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}>{site.phone}</a>, {site.officeHours}.</p>
+
+    <p style="font-size:14px;color:color-mix(in srgb,var(--color-text) 55%,transparent);margin-top:calc(1.6*var(--leading))">This policy is provided as a starting point and does not constitute legal advice. Given that Apna serves older adults and their families, please have it reviewed by a qualified attorney before you rely on it.</p>
+  </main>
+</Layout>

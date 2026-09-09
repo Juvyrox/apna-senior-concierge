@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../lib/site';
+const title = `Terms of Service — ${site.name}`;
+const description = `The terms for using the Apna Senior Concierge website and understanding the scope of our non-medical companion service.`;
+---
+<Layout title={title} description={description}>
+  <main id="main" class="legal">
+    <p style="margin:0 0 calc(1.2*var(--leading))"><a href="/">← Back to Apna Senior Concierge</a></p>
+
+    <h1>Terms of Service</h1>
+    <p class="updated">Last updated {site.lastUpdated}</p>
+
+    <p class="lead">These terms cover your use of this website and explain, in plain language, what Apna Senior Concierge does and does not provide. The actual service is governed by a separate written service agreement signed before any standing visits begin.</p>
+
+    <h2>1. About Apna</h2>
+    <p>Apna Senior Concierge is a non-medical senior concierge and companion service in the {site.region}, founded by {site.founder}. Contact: <a href={`mailto:${site.email}`}>{site.email}</a>, <a href={site.phoneHref}>{site.phone}</a>.</p>
+
+    <h2>2. What our service is — and is not</h2>
+    <p>Apna provides companionship, errands, grocery support, appointment accompaniment, transportation assistance as part of hourly companion visits, technology help, and family communication.</p>
+    <p>Apna is <strong>not</strong> a licensed home care organization, home health agency, hospice, nursing service, or charter-party carrier. We do <strong>not</strong> provide medical care, nursing, medication administration, injections, wound care, medical advice, lifting, transfers, bathing, toileting, or any licensed personal care. Driving is provided only as part of hourly companion visits and is not sold as a separate transportation fare. If your family needs licensed medical or personal care, we will gladly point you toward an appropriate provider.</p>
+
+    <h2>3. No medical, legal or financial advice</h2>
+    <p>Nothing on this website or said by a companion is medical, legal, immigration or financial advice. Always rely on qualified, licensed professionals for those needs.</p>
+
+    <h2>4. The service agreement governs care</h2>
+    <p>Any care we provide is set out in a written service agreement covering rates, scope, hours and terms, signed before the standing week begins. Where that agreement and this website differ, the signed service agreement controls the service itself.</p>
+
+    <h2>5. Using the website and the booking form</h2>
+    <p>You agree to provide accurate information and to use the site lawfully. The “Book a free call” form is an enquiry only — submitting it does not create a contract, book a visit, or charge anything. Please do not submit medical, financial, or other sensitive personal details through the form.</p>
+
+    <h2>6. Intellectual property</h2>
+    <p>The Apna name, wording, and design on this site belong to Apna Senior Concierge and may not be copied or reused without permission.</p>
+
+    <h2>7. Disclaimers</h2>
+    <p>The website is provided “as is,” without warranties of any kind, and we do not guarantee it will always be available, accurate, or error-free. Availability of specific hours, languages, plans, and service areas can change, and current capacity is confirmed on the call.</p>
+
+    <h2>8. Limitation of liability</h2>
+    <p>To the fullest extent permitted by law, Apna Senior Concierge is not liable for indirect, incidental, or consequential damages arising from your use of this website. This section does not limit any liability that cannot be limited under applicable law.</p>
+
+    <h2>9. Governing law</h2>
+    <p>These terms are governed by the laws of the State of California, without regard to conflict-of-law rules.</p>
+
+    <h2>10. Changes</h2>
+    <p>We may update these terms; the date above shows the latest version. Continued use of the website after changes means you accept the updated terms.</p>
+
+    <h2>11. Contact</h2>
+    <p>Questions about these terms? Email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}>{site.phone}</a>, {site.officeHours}.</p>
+
+    <p style="font-size:14px;color:color-mix(in srgb,var(--color-text) 55%,transparent);margin-top:calc(1.6*var(--leading))">These terms are a starting template and are not legal advice. Please have them, and your written service agreement, reviewed by a qualified California attorney before relying on them.</p>
+  </main>
+</Layout>
