@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Apna Senior Concierge">
-  <rect width="44" height="44" rx="8" fill="#f3f2f2"/>
-  <g fill="none" stroke="#2f5d45" stroke-width="2.25">
-    <rect x="8" y="8" width="28" height="28"/>
-    <rect x="8" y="8" width="28" height="28" transform="rotate(45 22 22)"/>
-  </g>
-  <circle cx="22" cy="22" r="7" fill="none" stroke="#b68235" stroke-width="2.25"/>
-</svg>
