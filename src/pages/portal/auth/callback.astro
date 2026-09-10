@@ -3,9 +3,24 @@ export const prerender = false;
 import { supabaseServer } from '../../../lib/supabase';
 
 const code = Astro.url.searchParams.get('code');
-if (code) {
-  const supabase = supabaseServer(Astro.cookies, Astro.locals.runtime.env);
-  await supabase.auth.exchangeCodeForSession(code);
+
+if (!code) {
+  return new Response('CALLBACK DEBUG: no ?code param was present on this URL.', {
+    status: 200,
+    headers: { 'Content-Type': 'text/plain' },
+  });
 }
+
+const supabase = supabaseServer(Astro.cookies, Astro.locals.runtime.env);
+const { error } = await supabase.auth.exchangeCodeForSession(code);
+
+if (error) {
+  // TEMPORARY debug surface — remove once login is confirmed working.
+  return new Response(`CALLBACK DEBUG ERROR:\n\n${error.message}`, {
+    status: 200,
+    headers: { 'Content-Type': 'text/plain' },
+  });
+}
+
 return Astro.redirect('/portal');
 ---

@@ -1,5 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
-import { supabaseServer } from './lib/supabase';
+import { supabaseServer, supabaseAdmin } from './lib/supabase';
 
 const PUBLIC_PORTAL_PATHS = ['/portal/login', '/portal/auth/callback'];
 
@@ -16,6 +16,22 @@ export const onRequest = defineMiddleware(async (context, next) => {
     context.locals.supabase = supabase;
     context.locals.user = sessionUser;
     user = sessionUser;
+
+    // First login: link this auth account to a client row that matches
+    // their email but isn't linked to anyone yet. Cheap no-op on every
+    // later request once the link exists (the .is() filter finds nothing).
+    if (user?.email) {
+      const admin = supabaseAdmin(context.locals.runtime.env);
+      const { data: unlinked } = await admin
+        .from('clients')
+        .select('id')
+        .eq('email', user.email)
+        .is('auth_user_id', null)
+        .maybeSingle();
+      if (unlinked) {
+        await admin.from('clients').update({ auth_user_id: user.id }).eq('id', unlinked.id);
+      }
+    }
   } catch (err) {
     // TEMPORARY — surfaces the real error instead of a blank 500 while we
     // debug the first deploy. Status forced to 200 so the browser actually
