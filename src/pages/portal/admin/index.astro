@@ -1,0 +1,88 @@
+---
+export const prerender = false;
+import Layout from '../../../layouts/Layout.astro';
+import { site } from '../../../lib/site';
+import { supabaseAdmin } from '../../../lib/supabase';
+
+const admin = supabaseAdmin(Astro.locals.runtime.env);
+
+let successMsg = '';
+let errorMsg = '';
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const name = String(form.get('name') || '').trim();
+  const email = String(form.get('email') || '').trim().toLowerCase();
+  const phone = String(form.get('phone') || '').trim();
+  const for_relation = String(form.get('for_relation') || '').trim();
+  const plan_tier = String(form.get('plan_tier') || '');
+  const hourly_rate = Number(form.get('hourly_rate') || 50);
+  const notes = String(form.get('notes') || '').trim();
+
+  if (!name || !email || !plan_tier) {
+    errorMsg = 'Name, email, and plan are required.';
+  } else {
+    const { error } = await admin.from('clients').insert({
+      name, email, phone: phone || null, for_relation: for_relation || null,
+      plan_tier, hourly_rate, notes: notes || null,
+    });
+    if (error) errorMsg = error.message.includes('duplicate') ? 'A client with that email already exists.' : 'Could not add client — try again.';
+    else successMsg = `${name} added. They can now log in at ${site.url}/portal/login using ${email}.`;
+  }
+}
+
+const { data: clients } = await admin
+  .from('clients')
+  .select('id, name, email, plan_tier, hourly_rate, status, auth_user_id, created_at')
+  .order('created_at', { ascending: false });
+---
+<Layout title={`Admin — ${site.name}`} noindex={true}>
+  <main style="max-width:640px;margin:60px auto 100px;padding:0 20px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+      <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0">Add a client</h1>
+      <a href="/portal" style="font-size:14px">Back to your account &rarr;</a>
+    </div>
+    <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 28px">
+      They'll be able to log in the moment you add them — no invite link needed. Their portal account links automatically the first time they sign in with this email.
+    </p>
+
+    {successMsg && <p style="font-size:16px;line-height:24px;padding:14px 16px;border:1px solid var(--green);border-radius:var(--radius-md);margin:0 0 24px">{successMsg}</p>}
+    {errorMsg && <p style="color:var(--color-accent-700);font-size:15px;margin:0 0 16px">{errorMsg}</p>}
+
+    <form method="POST" style="display:flex;flex-direction:column;gap:16px;margin-bottom:56px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="field"><label for="name">Client name</label><input class="input" id="name" name="name" required /></div>
+        <div class="field"><label for="email">Email (their login)</label><input class="input" id="email" name="email" type="email" required /></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="field"><label for="phone">Phone</label><input class="input" id="phone" name="phone" /></div>
+        <div class="field"><label for="for_relation">For (relation)</label><input class="input" id="for_relation" name="for_relation" placeholder="Mother" /></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="field">
+          <label for="plan_tier">Plan</label>
+          <select class="input" id="plan_tier" name="plan_tier" required>
+            <option value="">Choose one</option>
+            <option value="chai">Chai — 2 hrs/wk</option>
+            <option value="dawat">Dawat — 4 hrs/wk</option>
+            <option value="ghar">Ghar — 6 hrs/wk</option>
+          </select>
+        </div>
+        <div class="field"><label for="hourly_rate">Hourly rate</label><input class="input" id="hourly_rate" name="hourly_rate" type="number" value="50" required /></div>
+      </div>
+      <div class="field"><label for="notes">Notes</label><textarea class="input" id="notes" name="notes" rows="2" style="resize:vertical;font-family:var(--font-body)"></textarea></div>
+      <button type="submit" class="btn btn-primary">Add client</button>
+    </form>
+
+    <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Current clients</p>
+    {(clients || []).map((c) => (
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--color-divider)">
+        <div>
+          <p style="margin:0;font-size:16px">{c.name} <span style="color:color-mix(in srgb,var(--color-text) 88%,transparent);font-size:14px">— {c.email}</span></p>
+          <p style="margin:0;font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent);text-transform:capitalize">{c.plan_tier} · ${c.hourly_rate}/hr · {c.status} · {c.auth_user_id ? 'logged in at least once' : 'not logged in yet'}</p>
+        </div>
+      </div>
+    ))}
+    {(!clients || clients.length === 0) && <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No clients yet.</p>}
+  </main>
+</Layout>

@@ -32,6 +32,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
         await admin.from('clients').update({ auth_user_id: user.id }).eq('id', unlinked.id);
       }
     }
+
+    const adminList = (context.locals.runtime.env.ADMIN_EMAILS || '')
+      .split(',')
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+    context.locals.isAdmin = !!user?.email && adminList.includes(user.email.toLowerCase());
   } catch (err) {
     // TEMPORARY — surfaces the real error instead of a blank 500 while we
     // debug the first deploy. Status forced to 200 so the browser actually
@@ -47,6 +53,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const isPublic = PUBLIC_PORTAL_PATHS.some((p) => pathname.startsWith(p));
   if (!user && !isPublic) {
     return context.redirect('/portal/login');
+  }
+  if (pathname.startsWith('/portal/admin') && !context.locals.isAdmin) {
+    return context.redirect('/portal');
   }
   return next();
 });

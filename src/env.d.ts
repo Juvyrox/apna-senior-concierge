@@ -8,6 +8,9 @@ type CloudflareEnv = {
   STRIPE_SECRET_KEY: string;
   STRIPE_WEBHOOK_SECRET: string;
   STRIPE_PUBLISHABLE_KEY: string;
+  // Comma-separated list of emails allowed to see /portal/admin.
+  // Change this in Cloudflare → Settings → Variables — no code change needed.
+  ADMIN_EMAILS: string;
 };
 
 declare namespace App {
@@ -20,5 +23,6 @@ declare namespace App {
     };
     supabase: import('@supabase/supabase-js').SupabaseClient;
     user: import('@supabase/supabase-js').User | null;
+    isAdmin: boolean;
   }
 }

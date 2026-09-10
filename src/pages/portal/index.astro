@@ -37,6 +37,10 @@ const money = (n: number) => `$${Number(n).toFixed(2)}`;
       <form method="POST" action="/api/portal/logout"><button type="submit" class="btn btn-ghost" style="font-size:14px">Sign out</button></form>
     </div>
 
+    {Astro.locals.isAdmin && (
+      <p style="margin:0 0 28px"><a href="/portal/admin" style="font-size:14px">Add a client &rarr;</a></p>
+    )}
+
     {!client && (
       <p style="font-size:17px;line-height:26px">We don't have a client record linked to this email yet. If you've just booked with Apna, this will appear shortly — otherwise reach out at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
     )}
