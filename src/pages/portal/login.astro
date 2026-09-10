@@ -17,7 +17,7 @@ try {
         email,
         options: { emailRedirectTo: `${site.url}/portal/auth/callback` },
       });
-      if (error) errorMsg = 'Could not send the link — try again in a moment.';
+      if (error) errorMsg = `DEBUG: ${error.message}`;
       else sent = true;
     } else {
       errorMsg = 'Enter the email you used with Apna.';
