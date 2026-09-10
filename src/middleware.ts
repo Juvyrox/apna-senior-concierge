@@ -9,7 +9,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   let user = null;
   try {
-    const supabase = supabaseServer(context.cookies);
+    const supabase = supabaseServer(context.cookies, context.locals.runtime.env);
     const {
       data: { user: sessionUser },
     } = await supabase.auth.getUser();

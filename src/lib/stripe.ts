@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
 
-export function stripe() {
-  return new Stripe(import.meta.env.STRIPE_SECRET_KEY);
+export function stripe(env: { STRIPE_SECRET_KEY: string }) {
+  return new Stripe(env.STRIPE_SECRET_KEY);
 }

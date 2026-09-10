@@ -4,7 +4,7 @@ import { supabaseServer } from '../../../lib/supabase';
 
 const code = Astro.url.searchParams.get('code');
 if (code) {
-  const supabase = supabaseServer(Astro.cookies);
+  const supabase = supabaseServer(Astro.cookies, Astro.locals.runtime.env);
   await supabase.auth.exchangeCodeForSession(code);
 }
 return Astro.redirect('/portal');

@@ -3,7 +3,7 @@ import { supabaseAdmin } from '../../lib/supabase';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   let body: Record<string, string>;
   try {
     body = await request.json();
@@ -17,7 +17,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response('Missing required fields', { status: 400 });
   }
 
-  const admin = supabaseAdmin();
+  const admin = supabaseAdmin(locals.runtime.env);
   const { error } = await admin.from('booking_requests').insert({
     name: body.name,
     phone: body.phone,

@@ -22,7 +22,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return new Response('Invoice not found or already paid', { status: 404 });
   }
 
-  const session = await stripe().checkout.sessions.create({
+  const session = await stripe(locals.runtime.env).checkout.sessions.create({
     mode: 'payment',
     payment_method_types: ['card'],
     line_items: [

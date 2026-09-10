@@ -4,16 +4,16 @@ import { supabaseAdmin } from '../../../lib/supabase';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   const sig = request.headers.get('stripe-signature');
   const body = await request.text();
 
   let event;
   try {
-    event = stripe().webhooks.constructEvent(
+    event = stripe(locals.runtime.env).webhooks.constructEvent(
       body,
       sig!,
-      import.meta.env.STRIPE_WEBHOOK_SECRET
+      locals.runtime.env.STRIPE_WEBHOOK_SECRET
     );
   } catch {
     return new Response('Invalid signature', { status: 400 });
@@ -23,7 +23,7 @@ export const POST: APIRoute = async ({ request }) => {
     const session = event.data.object as any;
     const invoiceId = session.metadata?.invoice_id;
     if (invoiceId) {
-      await supabaseAdmin()
+      await supabaseAdmin(locals.runtime.env)
         .from('invoices')
         .update({
           status: 'paid',
