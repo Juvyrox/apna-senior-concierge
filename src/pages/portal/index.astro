@@ -1,0 +1,116 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../lib/site';
+
+const { supabase, user } = Astro.locals;
+
+const { data: client } = await supabase
+  .from('clients')
+  .select('*')
+  .eq('auth_user_id', user!.id)
+  .single();
+
+let visits: any[] = [];
+let invoices: any[] = [];
+let visitRequests: any[] = [];
+
+if (client) {
+  const [v, i, r] = await Promise.all([
+    supabase.from('visits').select('*').eq('client_id', client.id).order('visit_date', { ascending: false }).limit(10),
+    supabase.from('invoices').select('*').eq('client_id', client.id).order('billing_period', { ascending: false }),
+    supabase.from('visit_requests').select('*').eq('client_id', client.id).order('created_at', { ascending: false }).limit(5),
+  ]);
+  visits = v.data || [];
+  invoices = i.data || [];
+  visitRequests = r.data || [];
+}
+
+const money = (n: number) => `$${Number(n).toFixed(2)}`;
+---
+<Layout title={`Your account — ${site.name}`} noindex={true}>
+  <main style="max-width:720px;margin:60px auto 100px;padding:0 20px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px">
+      <h1 style="font-family:var(--font-heading);font-weight:400;font-size:28px;margin:0">
+        {client ? `Welcome, ${client.name.split(' ')[0]}` : 'Your account'}
+      </h1>
+      <form method="POST" action="/api/portal/logout"><button type="submit" class="btn btn-ghost" style="font-size:14px">Sign out</button></form>
+    </div>
+
+    {!client && (
+      <p style="font-size:17px;line-height:26px">We don't have a client record linked to this email yet. If you've just booked with Apna, this will appear shortly — otherwise reach out at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    )}
+
+    {client && (
+      <>
+        <section style="margin-bottom:40px">
+          <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Your plan</p>
+          <p style="font-size:17px;line-height:26px;margin:0">
+            {client.plan_tier?.charAt(0).toUpperCase()}{client.plan_tier?.slice(1)} · ${client.hourly_rate}/hr · Status: {client.status}
+          </p>
+        </section>
+
+        <section style="margin-bottom:40px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Invoices</p>
+            <a href="/portal/request-visit" style="font-size:14px">Request a visit &rarr;</a>
+          </div>
+          {invoices.length === 0 && <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No invoices yet.</p>}
+          {invoices.map((inv) => (
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--color-divider)">
+              <div>
+                <p style="margin:0;font-size:16px">{inv.billing_period} — {inv.hours_billed} hrs</p>
+                <p style="margin:0;font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent);text-transform:capitalize">{inv.status}</p>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:16px;font-variant-numeric:tabular-nums">{money(inv.amount)}</span>
+                {inv.status === 'unpaid' && (
+                  <button class="btn btn-primary" style="font-size:14px;padding:8px 14px" data-pay-invoice={inv.id}>Pay now</button>
+                )}
+              </div>
+            </div>
+          ))}
+        </section>
+
+        <section style="margin-bottom:40px">
+          <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Recent visits</p>
+          {visits.length === 0 && <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No visits logged yet.</p>}
+          {visits.map((v) => (
+            <div style="padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">
+              {v.visit_date} — {v.hours} hrs {v.companion && `with ${v.companion}`}
+              {v.notes && <span style="display:block;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin-top:2px">{v.notes}</span>}
+            </div>
+          ))}
+        </section>
+
+        {visitRequests.length > 0 && (
+          <section>
+            <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Your recent requests</p>
+            {visitRequests.map((r) => (
+              <div style="padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">
+                {r.requested_day} {r.requested_start}–{r.requested_end} — <span style="text-transform:capitalize">{r.status}</span>
+              </div>
+            ))}
+          </section>
+        )}
+      </>
+    )}
+  </main>
+
+  <script>
+    document.querySelectorAll('[data-pay-invoice]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const invoiceId = btn.getAttribute('data-pay-invoice');
+        (btn as HTMLButtonElement).disabled = true;
+        const res = await fetch('/api/stripe/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ invoiceId }),
+        });
+        const { url } = await res.json();
+        if (url) window.location.href = url;
+        else (btn as HTMLButtonElement).disabled = false;
+      });
+    });
+  </script>
+</Layout>

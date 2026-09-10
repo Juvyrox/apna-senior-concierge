@@ -1,0 +1,73 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../lib/site';
+
+const { supabase, user } = Astro.locals;
+
+const { data: client } = await supabase
+  .from('clients')
+  .select('id')
+  .eq('auth_user_id', user!.id)
+  .single();
+
+let submitted = false;
+let errorMsg = '';
+
+if (Astro.request.method === 'POST' && client) {
+  const form = await Astro.request.formData();
+  const requested_day = String(form.get('day') || '');
+  const requested_start = String(form.get('start') || '');
+  const requested_end = String(form.get('end') || '');
+  const notes = String(form.get('notes') || '');
+
+  if (!requested_day || !requested_start || !requested_end) {
+    errorMsg = 'Fill in the day and time.';
+  } else {
+    const { error } = await supabase.from('visit_requests').insert({
+      client_id: client.id, requested_day, requested_start, requested_end, notes,
+    });
+    if (error) errorMsg = 'Could not send the request — try again.';
+    else submitted = true;
+  }
+}
+---
+<Layout title={`Request a visit — ${site.name}`} noindex={true}>
+  <main style="max-width:480px;margin:60px auto 100px;padding:0 20px">
+    <p style="font-size:14px"><a href="/portal">&larr; Back to your account</a></p>
+    <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:16px 0 8px">Request a visit</h1>
+    <p style="font-size:16px;line-height:24px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 24px">
+      This isn't confirmed until we reach back out — visits happen weekdays after 4pm or on weekends.
+    </p>
+
+    {submitted ? (
+      <p style="font-size:17px;line-height:26px">Sent. We'll confirm the time with you shortly.</p>
+    ) : (
+      <form method="POST" style="display:flex;flex-direction:column;gap:16px">
+        <div class="field">
+          <label for="day">Day</label>
+          <select class="input" id="day" name="day" required>
+            <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option>
+            <option>Friday</option><option>Saturday</option><option>Sunday</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="field">
+            <label for="start">Start time</label>
+            <input class="input" id="start" name="start" type="text" placeholder="4:30 PM" required />
+          </div>
+          <div class="field">
+            <label for="end">End time</label>
+            <input class="input" id="end" name="end" type="text" placeholder="7:30 PM" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="notes">Anything to add</label>
+          <textarea class="input" id="notes" name="notes" rows="3" style="resize:vertical;font-family:var(--font-body)" placeholder="Cardiology appointment that week"></textarea>
+        </div>
+        {errorMsg && <p style="color:var(--color-accent-700);font-size:15px;margin:0">{errorMsg}</p>}
+        <button type="submit" class="btn btn-primary">Send request</button>
+      </form>
+    )}
+  </main>
+</Layout>

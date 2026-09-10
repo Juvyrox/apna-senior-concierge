@@ -42,7 +42,7 @@ export const site = {
   // To collect submissions automatically, set this to a POST endpoint that
   // accepts JSON — e.g. a Supabase Edge Function or a form API. The form
   // will POST the fields as JSON and show the confirmation on success.
-  formEndpoint: '',
+  formEndpoint: '/api/booking',
 
   // ── Analytics (privacy-friendly, cookieless) ──
   // Leave blank to ship with NO analytics (no third-party script, no cookies).
