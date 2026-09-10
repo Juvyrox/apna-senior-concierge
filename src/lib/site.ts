@@ -13,7 +13,10 @@ export const site = {
   founder: 'Juveriyah Salat',
 
   // Canonical production domain (owned domain, not the host subdomain).
-  url: 'https://apnaseniorconcierge.com',
+  // TEMPORARY: using the live .workers.dev address until apnaseniorconcierge.com
+  // is actually connected to this Cloudflare Worker (custom domain). Once that's
+  // done, switch this back to 'https://apnaseniorconcierge.com'.
+  url: 'https://apna-senior-concierge.skyscaper1.workers.dev',
 
   // Contact
   email: 'hello@apnaseniorconcierge.com',
