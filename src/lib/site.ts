@@ -16,7 +16,7 @@ export const site = {
   url: 'https://apnaseniorconcierge.com',
 
   // Contact
-  email: 'hello@apnaconcierge.com',
+  email: 'hello@apnaseniorconcierge.com',
   phone: '(510) 437-0136',
   phoneHref: 'tel:+15104370136',
   officeHours: 'Mon to Sat, 9am to 7pm',
