@@ -31,12 +31,13 @@ export const site = {
     'San Gabriel', 'Alhambra', 'Covina', 'West Covina', 'Azusa', 'Glendora',
   ],
 
-  // Plans — canonical: Chai 2h / Dawat 4h / Ghar 6h, flat $50/hr.
-  rateHourly: '$50/hr',
+  // Plans — canonical: Chai 2h / Dawat 4h / Ghar 6h. Rate starts at $50/hr
+  // and varies by what the family needs — not published as a fixed price.
+  rateHourly: 'Starts at $50/hr',
   plans: {
-    chai: { hours: '2 hours a week', monthly: '$430 / month' },
-    dawat: { hours: '4 hours a week', monthly: '$865 / month' },
-    ghar: { hours: '6 hours a week', monthly: '$1,300 / month' },
+    chai: { hours: '2 hours a week' },
+    dawat: { hours: '4 hours a week' },
+    ghar: { hours: '6 hours a week' },
   },
 
   // ── Booking form delivery (host-agnostic — no Netlify Forms) ──

@@ -2,11 +2,12 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
+import { site } from './src/lib/site.ts';
 
-// The canonical production URL — the owned domain. Canonical tags, the
-// sitemap and Open Graph URLs all follow it. Point the domain's DNS at your
-// host and redeploy; nothing here is tied to a specific hosting provider.
-const SITE_URL = 'https://apnaseniorconcierge.com';
+// Single source of truth: site.url in src/lib/site.ts. Canonical tags, the
+// sitemap and Open Graph URLs all follow it automatically — change it in
+// ONE place (site.ts) when the real domain goes live, not here too.
+const SITE_URL = site.url;
 
 // https://astro.build/config
 export default defineConfig({
