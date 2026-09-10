@@ -1,11 +1,15 @@
 import type { APIRoute } from 'astro';
 import { stripe } from '../../../lib/stripe';
 import { site } from '../../../lib/site';
+import { supabaseServer } from '../../../lib/supabase';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
-  const { supabase, user } = locals;
+export const POST: APIRoute = async ({ request, cookies, locals }) => {
+  const supabase = supabaseServer(cookies, locals.runtime.env);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) return new Response('Unauthorized', { status: 401 });
 
   const { invoiceId } = await request.json();
