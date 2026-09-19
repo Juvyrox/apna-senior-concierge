@@ -1,26 +1,25 @@
 ---
 export const prerender = false;
+import Layout from '../../../layouts/Layout.astro';
+import { site } from '../../../lib/site';
 import { supabaseServer } from '../../../lib/supabase';
 
 const code = Astro.url.searchParams.get('code');
+let failed = false;
 
 if (!code) {
-  return new Response('CALLBACK DEBUG: no ?code param was present on this URL.', {
-    status: 200,
-    headers: { 'Content-Type': 'text/plain' },
-  });
+  failed = true;
+} else {
+  const supabase = supabaseServer(Astro.cookies, Astro.locals.runtime.env);
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  if (error) failed = true;
+  else return Astro.redirect('/portal');
 }
-
-const supabase = supabaseServer(Astro.cookies, Astro.locals.runtime.env);
-const { error } = await supabase.auth.exchangeCodeForSession(code);
-
-if (error) {
-  // TEMPORARY debug surface — remove once login is confirmed working.
-  return new Response(`CALLBACK DEBUG ERROR:\n\n${error.message}`, {
-    status: 200,
-    headers: { 'Content-Type': 'text/plain' },
-  });
-}
-
-return Astro.redirect('/portal');
 ---
+<Layout title={`Sign in — ${site.name}`} noindex={true}>
+  <main style="max-width:420px;margin:80px auto;padding:0 20px">
+    <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 12px">That link didn't work</h1>
+    <p style="font-size:16px;line-height:25px;margin:0 0 20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">It may have expired, or already been used. Request a fresh one below.</p>
+    <a class="btn btn-primary" href="/portal/login">Back to sign in</a>
+  </main>
+</Layout>

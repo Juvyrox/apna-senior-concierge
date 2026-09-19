@@ -1,6 +1,7 @@
 ---
 export const prerender = false;
 import Layout from '../../layouts/Layout.astro';
+import PortalHeader from '../../components/PortalHeader.astro';
 import { site } from '../../lib/site';
 
 const { supabase, user } = Astro.locals;
@@ -33,11 +34,11 @@ if (Astro.request.method === 'POST' && client) {
 }
 ---
 <Layout title={`Request a visit — ${site.name}`} noindex={true}>
+  <PortalHeader backHref="/portal" backLabel="Your account" />
   <main style="max-width:480px;margin:60px auto 100px;padding:0 20px">
-    <p style="font-size:14px"><a href="/portal">&larr; Back to your account</a></p>
-    <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:16px 0 8px">Request a visit</h1>
+    <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 8px">Request a visit</h1>
     <p style="font-size:16px;line-height:24px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 24px">
-      This isn't confirmed until we reach back out — visits happen weekdays after 4pm or on weekends.
+      This isn't confirmed until we reach back out — visits happen on weekends right now, minimum two hours, so tell us what works and we'll do our best to match it.
     </p>
 
     {submitted ? (
@@ -47,18 +48,22 @@ if (Astro.request.method === 'POST' && client) {
         <div class="field">
           <label for="day">Day</label>
           <select class="input" id="day" name="day" required>
-            <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option>
-            <option>Friday</option><option>Saturday</option><option>Sunday</option>
+            <option>Saturday</option><option>Sunday</option>
           </select>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px">
           <div class="field">
             <label for="start">Start time</label>
             <input class="input" id="start" name="start" type="text" placeholder="4:30 PM" required />
           </div>
           <div class="field">
-            <label for="end">End time</label>
-            <input class="input" id="end" name="end" type="text" placeholder="7:30 PM" required />
+            <label for="end">Visit length</label>
+            <select class="input" id="end" name="end" required>
+              <option value="2 hours">2 hours</option>
+              <option value="3 hours">3 hours</option>
+              <option value="4 hours">4 hours</option>
+              <option value="Longer — ask us">Longer — ask us</option>
+            </select>
           </div>
         </div>
         <div class="field">

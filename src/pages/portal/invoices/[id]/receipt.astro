@@ -1,0 +1,50 @@
+---
+export const prerender = false;
+import Layout from '../../../../layouts/Layout.astro';
+import PortalHeader from '../../../../components/PortalHeader.astro';
+import { site } from '../../../../lib/site';
+
+const { supabase, user } = Astro.locals;
+const { id } = Astro.params;
+
+const { data: client } = await supabase.from('clients').select('id, name, email').eq('auth_user_id', user!.id).single();
+
+let invoice: any = null;
+if (client) {
+  const { data } = await supabase.from('invoices').select('*').eq('id', id).eq('client_id', client.id).single();
+  invoice = data;
+}
+
+const money = (n: number) => `$${Number(n).toFixed(2)}`;
+---
+<Layout title={`Receipt — ${site.name}`} noindex={true}>
+  <PortalHeader backHref="/portal" backLabel="Your account" />
+  <main style="max-width:520px;margin:60px auto 100px;padding:0 20px" class="receipt-main">
+    {!invoice ? (
+      <p style="font-size:16px">Receipt not found.</p>
+    ) : (
+      <div style="border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:calc(1.5*var(--leading))">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px">
+          <span style="font-family:var(--font-heading);font-size:20px">{site.name}</span>
+          <span style="font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Receipt</span>
+        </div>
+        <p style="font-size:15px;margin:0 0 6px"><strong>Billed to:</strong> {client!.name}</p>
+        <p style="font-size:15px;margin:0 0 24px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{client!.email}</p>
+        <table style="width:100%;border-collapse:collapse;font-size:15px">
+          <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Billing period</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">{invoice.billing_period}</td></tr>
+          <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Hours</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">{invoice.hours_billed}</td></tr>
+          <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Rate</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">${invoice.rate}/hr</td></tr>
+          <tr><td style="padding:12px 0;border-top:1px solid var(--color-divider);font-weight:600">Total paid</td><td style="padding:12px 0;border-top:1px solid var(--color-divider);text-align:right;font-weight:600">{money(invoice.amount)}</td></tr>
+          <tr><td style="padding:8px 0" colspan="2">Paid on {invoice.date_paid || '—'}</td></tr>
+        </table>
+        <button class="btn btn-ghost no-print" style="margin-top:20px;font-size:14px" onclick="window.print()">Print / save as PDF</button>
+      </div>
+    )}
+  </main>
+  <style>
+    @media print {
+      header, .no-print { display: none !important; }
+      main { margin: 0 !important; }
+    }
+  </style>
+</Layout>

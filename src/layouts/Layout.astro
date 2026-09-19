@@ -33,7 +33,6 @@ const jsonLd = {
   founder: { '@type': 'Person', name: site.founder },
   areaServed: [site.region, ...site.cities.map((c) => `${c}, CA`)],
   address: { '@type': 'PostalAddress', addressRegion: 'CA', addressCountry: 'US' },
-  openingHours: 'Mo-Sa 09:00-19:00',
   priceRange: '$$',
   image: ogImage,
   slogan: site.tagline,

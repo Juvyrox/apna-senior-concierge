@@ -1,6 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../lib/site';
+import { hero } from '../data/hero';
+import { services } from '../data/services';
+import { plans, rateNote } from '../data/plans';
+import { faq } from '../data/faq';
+import { availability } from '../data/availability';
+import { testimonials } from '../data/testimonials';
+import { team } from '../data/team';
+import { locations } from '../data/locations';
 ---
 <Layout>
   <nav class="nav" aria-label="Primary" style="position:sticky;top:0;z-index:30;background:var(--color-bg);flex-wrap:wrap;row-gap:8px;border-bottom:1px solid var(--color-divider);padding-inline:max(var(--edge),calc((100% - 1180px)/2 + var(--edge)))">
@@ -21,14 +29,14 @@ import { site } from '../lib/site';
     <div style="max-width:1180px;margin:0 auto;padding:0 var(--edge)">
       <section style="min-height:calc(100svh - 88px);display:flex;flex-direction:column;justify-content:center;padding:calc(2*var(--leading)) 0">
         <h1 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(42px,5.6vw,78px);line-height:1.08;letter-spacing:-0.012em;margin:calc(1.25*var(--leading)) 0 0 -0.042em;max-width:22ch">
-          <span style="display:block">Your parents shouldn't</span>
-          <span style="display:block">have to explain themselves</span>
-          <span style="display:block;font-style:italic;color:var(--green)">in English.</span>
+          {hero.headlineLines.map((line) => (
+            <span style={`display:block${line.italic ? ';font-style:italic;color:var(--green)' : ''}`}>{line.text}</span>
+          ))}
         </h1>
-        <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(21px,2.2vw,27px);line-height:1.5;margin:calc(0.9*var(--leading)) 0 0;max-width:52ch;color:color-mix(in srgb,var(--color-text) 92%,transparent)">Companions who speak your parents’ language, for the drive to the doctor, the market run, and the hours in between across the San Gabriel Valley.</p>
+        <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(21px,2.2vw,27px);line-height:1.5;margin:calc(0.9*var(--leading)) 0 0;max-width:52ch;color:color-mix(in srgb,var(--color-text) 92%,transparent)">{hero.subhead}</p>
         <div style="margin-top:calc(1.3*var(--leading));display:flex;gap:14px;flex-wrap:wrap">
-          <a class="btn btn-primary" href="#book" style="font-size:16px;padding:12px 22px">Book a free call</a>
-          <a class="btn btn-ghost" href="#help" style="font-size:16px">See what we do</a>
+          <a class="btn btn-primary" href={hero.ctaPrimary.href} style="font-size:16px;padding:12px 22px">{hero.ctaPrimary.label}</a>
+          <a class="btn btn-ghost" href={hero.ctaSecondary.href} style="font-size:16px">{hero.ctaSecondary.label}</a>
         </div>
       </section>
 
@@ -48,22 +56,12 @@ import { site } from '../lib/site';
 
       <section aria-label="At a glance" style="padding:calc(2*var(--leading)) 0">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:calc(1.5*var(--leading)) var(--leading)">
-          <div>
-            <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.3;margin:0;color:var(--green)">After 4pm<br />and weekends</p>
-            <p style="font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:14px 0 0">Hours</p>
-          </div>
-          <div>
-            <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.3;margin:0;font-feature-settings:'tnum' 1">2 hours</p>
-            <p style="font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:14px 0 0">Shortest plan</p>
-          </div>
-          <div>
-            <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.3;margin:0">Urdu, Hindi<br />English</p>
-            <p style="font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:14px 0 0">Languages spoken</p>
-          </div>
-          <div>
-            <p style="font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.3;margin:0">San Gabriel<br />Valley</p>
-            <p style="font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:14px 0 0">Where we go</p>
-          </div>
+          {availability.stats.map((stat) => (
+            <div>
+              <p style={`font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.3;margin:0;${stat.accent ? 'color:var(--green);' : ''}${stat.tabularNums ? "font-feature-settings:'tnum' 1;" : ''}`} set:html={stat.value.replace('\n', '<br />')} />
+              <p style="font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:14px 0 0">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>
@@ -84,38 +82,12 @@ import { site } from '../lib/site';
         <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">What we do</p>
         <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin:0 0 var(--leading);max-width:22ch">A week that runs, without anyone having to ask.</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:0 calc(2*var(--leading))">
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Rides to appointments</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Thursday, 5pm, cardiology. We drive, we park, we walk in, and we sit through it. You get a note afterwards saying what the doctor actually said.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Weekend prayers and gatherings</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">The masjid on a Saturday or Sunday, a janazah, a walima, with a stop at the bakery on the way home. Jummah falls in the weekday afternoon, which we can't cover yet.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Halal market and groceries</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">The good butcher, not the near one. We carry the bags in and put the cold things away.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Errands and the pharmacy</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Refills picked up, the post office, the bank lobby, the barber. Small things that pile up when nobody's free.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Chai and company</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Some visits have no errand in them at all. We put the kettle on and stay for the long part of the afternoon.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Mail, forms and phone calls</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Read out in Urdu, explained properly, and the call to the office made with your parent on the line rather than around them.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Phones and video calls</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">WhatsApp working again, the volume fixed, and a call to Karachi that connects on the first try.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">Getting out of the house</h3>
-            <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">The park, the senior centre, a friend's house, the shaadi you'd otherwise miss. Company on both ends of the drive.</p>
-          </div>
+          {services.map((s) => (
+            <div style="border-top:1px solid var(--color-divider);padding:16px 0">
+              <h3 style="font-family:var(--font-heading);font-weight:400;font-size:20px;margin:0 0 6px">{s.title}</h3>
+              <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{s.body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -150,51 +122,30 @@ import { site } from '../lib/site';
             <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Three plans</p>
             <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin:0;max-width:20ch">Pick by how much of the week you want covered.</h2>
           </div>
-          <p style="font-size:17px;line-height:28px;margin:0;max-width:34ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Six hours a week is the ceiling for now. One companion, few families, no rushing between houses. Some families need very little, some need more — we work out what fits and go from there. Rates start at $50 an hour and can go up depending on what's needed. Driving included on Dawat and Ghar. Nothing is charged before the first visit.</p>
+          <p style="font-size:17px;line-height:28px;margin:0;max-width:34ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Six hours a week is the ceiling for now. Every visit is at least two hours, so there's enough time to actually help once we're there. One companion, few families, no rushing between houses. Some families need very little, some need more — we work out what fits and go from there. Rates start at $50 an hour and can go up depending on what's needed. Driving included on Dawat and Ghar. Nothing is charged before the first visit.</p>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:calc(1.5*var(--leading)) calc(1.5*var(--leading));margin-top:calc(1.5*var(--leading))">
-          <div class="card" style="padding:calc(1.25*var(--leading));gap:0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:28px;line-height:1.2;margin:0">Chai</h3>
-            <span style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin-top:6px">2 HOURS A WEEK</span>
-            <p style="font-family:var(--font-heading);font-size:22px;line-height:1.2;margin:10px 0 0">Starts at $50<span style="font-family:var(--font-body);font-size:15px;color:color-mix(in srgb,var(--color-text) 70%,transparent)"> / hr — ask us</span></p>
-            <p style="font-size:17.5px;line-height:29px;margin:16px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Two hours a week, without the car. Company, errands within walking distance, and a person who notices what has changed since last week.</p>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;border-top:1px solid var(--color-divider);padding-top:16px">
-              <span style="font-size:17px;line-height:27px">The same day and hour every week</span>
-              <span style="font-size:17px;line-height:27px">Errands, mail, and household phone calls</span>
-              <span style="font-size:17px;line-height:27px">Video calls set up with family abroad</span>
-              <span style="font-size:17px;line-height:27px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Driving is not included at this level</span>
+          {plans.map((plan) => (
+            <div class={`card${plan.highlighted ? ' elev-sm' : ''}`} style={`padding:calc(1.25*var(--leading));gap:0${plan.highlighted ? ';border-color:var(--green)' : ''}`}>
+              {plan.badge ? (
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+                  <h3 style="font-family:var(--font-heading);font-weight:400;font-size:28px;line-height:1.2;margin:0">{plan.name}</h3>
+                  <span style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);border:1px solid var(--green);border-radius:var(--radius-sm);padding:3px 8px">{plan.badge}</span>
+                </div>
+              ) : (
+                <h3 style="font-family:var(--font-heading);font-weight:400;font-size:28px;line-height:1.2;margin:0">{plan.name}</h3>
+              )}
+              <span style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin-top:6px">{plan.hoursLabel.toUpperCase()}</span>
+              <p style="font-family:var(--font-heading);font-size:22px;line-height:1.2;margin:10px 0 0">{rateNote.main}<span style="font-family:var(--font-body);font-size:15px;color:color-mix(in srgb,var(--color-text) 70%,transparent)">{rateNote.suffix}</span></p>
+              <p style="font-size:17.5px;line-height:29px;margin:16px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{plan.description}</p>
+              <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;border-top:1px solid var(--color-divider);padding-top:16px">
+                {plan.features.map((f) => (
+                  <span style={`font-size:17px;line-height:27px${f.muted ? ';color:color-mix(in srgb,var(--color-text) 88%,transparent)' : ''}`}>{f.text}</span>
+                ))}
+              </div>
+              <a class={`btn ${plan.highlighted ? 'btn-primary' : 'btn-ghost'}`} href="#book" style={`margin-top:20px;align-self:flex-start${plan.highlighted ? ';border:none' : ''}`}>{plan.ctaLabel}</a>
             </div>
-            <a class="btn btn-ghost" href="#book" style="margin-top:20px;align-self:flex-start">Ask about Chai</a>
-          </div>
-          <div class="card elev-sm" style="padding:calc(1.25*var(--leading));gap:0;border-color:var(--green)">
-            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
-              <h3 style="font-family:var(--font-heading);font-weight:400;font-size:28px;line-height:1.2;margin:0">Dawat</h3>
-              <span style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);border:1px solid var(--green);border-radius:var(--radius-sm);padding:3px 8px">Most families</span>
-            </div>
-            <span style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin-top:6px">4 HOURS A WEEK</span>
-            <p style="font-family:var(--font-heading);font-size:22px;line-height:1.2;margin:10px 0 0">Starts at $50<span style="font-family:var(--font-body);font-size:15px;color:color-mix(in srgb,var(--color-text) 70%,transparent)"> / hr — ask us</span></p>
-            <p style="font-size:17.5px;line-height:29px;margin:16px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Four hours split over two visits, with the car. Enough for appointments and the grocery run in the same week.</p>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;border-top:1px solid var(--color-divider);padding-top:16px">
-              <span style="font-size:17px;line-height:27px">Two visits a week, same days each time</span>
-              <span style="font-size:17px;line-height:27px">Driving included, in our own car</span>
-              <span style="font-size:17px;line-height:27px">We wait through the appointment, not outside</span>
-              <span style="font-size:17px;line-height:27px">A written note to the family each week</span>
-            </div>
-            <a class="btn btn-primary" href="#book" style="margin-top:20px;align-self:flex-start;border:none">Ask about Dawat</a>
-          </div>
-          <div class="card" style="padding:calc(1.25*var(--leading));gap:0">
-            <h3 style="font-family:var(--font-heading);font-weight:400;font-size:28px;line-height:1.2;margin:0">Ghar</h3>
-            <span style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin-top:6px">6 HOURS A WEEK</span>
-            <p style="font-family:var(--font-heading);font-size:22px;line-height:1.2;margin:10px 0 0">Starts at $50<span style="font-family:var(--font-body);font-size:15px;color:color-mix(in srgb,var(--color-text) 70%,transparent)"> / hr — ask us</span></p>
-            <p style="font-size:17.5px;line-height:29px;margin:16px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Six hours over two or three visits. For families living far away, or when one person at home has been carrying all of it alone. Priority scheduling, and Ramadan and Eid hours arranged ahead.</p>
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;border-top:1px solid var(--color-divider);padding-top:16px">
-              <span style="font-size:17px;line-height:27px">Two longer visits instead of two short ones</span>
-              <span style="font-size:17px;line-height:27px">Changes accommodated the same week</span>
-              <span style="font-size:17px;line-height:27px">A standing weekend outing, masjid or park</span>
-              <span style="font-size:17px;line-height:27px">Ramadan and Eid hours planned ahead</span>
-            </div>
-            <a class="btn btn-ghost" href="#book" style="margin-top:20px;align-self:flex-start">Ask about Ghar</a>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -250,10 +201,11 @@ import { site } from '../lib/site';
         <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">About</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:calc(1.5*var(--leading)) clamp(32px,6vw,88px);align-items:start">
           <div>
-            <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin:0;max-width:18ch">I started this for my grandparents.</h2>
-            <p style="font-size:17.5px;line-height:var(--leading);margin:20px 0 0;max-width:52ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">There was no one to help the elders in our community who spoke the language. Most of my grandparents have passed now. They needed support, and asking for it was the hardest part for them. I didn't want that to be the reality for anyone else's grandparents here.</p>
-            <p style="font-size:17.5px;line-height:var(--leading);margin:18px 0 0;max-width:52ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">I've been in Southern California since 2016. My husband grew up here and has been part of IOK and ICSGV for more than twenty-five years. My family is part of the MCC Community in San Diego. My mother and mother-in-law both work in childcare, so looking after people is not new in our family.</p>
-            <p style="font-family:var(--font-heading);font-size:21px;line-height:1.4;margin:22px 0 0">Juveriyah Salat<span style="display:block;font-family:var(--font-body);font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin-top:4px">Founder, Apna Senior Concierge</span></p>
+            <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin:0;max-width:18ch">{team[0].headline}</h2>
+            {team[0].bioParagraphs.map((p, i) => (
+              <p style={`font-size:17.5px;line-height:var(--leading);margin:${i === 0 ? '20px' : '18px'} 0 0;max-width:52ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)`}>{p}</p>
+            ))}
+            <p style="font-family:var(--font-heading);font-size:21px;line-height:1.4;margin:22px 0 0">{team[0].name}<span style="display:block;font-family:var(--font-body);font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin-top:4px">{team[0].role}</span></p>
           </div>
           <div style="display:flex;flex-direction:column;gap:var(--leading);align-self:end">
             <div>
@@ -267,25 +219,34 @@ import { site } from '../lib/site';
 
     <div class="ornament-strip" aria-hidden="true"></div>
 
+    {testimonials.length > 0 && (
+      <div style="max-width:1180px;margin:0 auto;padding:0 var(--edge)">
+        <section aria-label="What families say" style="padding:calc(2.5*var(--leading)) 0">
+          <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">What families say</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:calc(1.5*var(--leading)) calc(2*var(--leading))">
+            {testimonials.map((t) => (
+              <div style="border-top:1px solid var(--color-divider);padding:18px 0">
+                <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">"{t.quote}"</p>
+                <p style="font-family:var(--font-heading);font-size:16px;margin:14px 0 0">{t.name}{t.relation && <span style="display:block;font-family:var(--font-body);font-size:14.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin-top:2px">{t.relation}</span>}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <hr class="hr" />
+      </div>
+    )}
+
     <div style="max-width:1180px;margin:0 auto;padding:0 var(--edge)">
       <section id="area" style="padding:calc(2.5*var(--leading)) 0;scroll-margin-top:76px">
         <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Where we go</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:calc(1.5*var(--leading)) calc(2*var(--leading))">
-          <div style="border-top:1px solid var(--color-divider);padding-top:18px">
-            <h2 style="font-family:var(--font-heading);font-weight:400;font-size:26px;line-height:1.25;margin:0">San Gabriel Valley</h2>
-            <p style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:8px 0 0">Regular weekly visits</p>
-            <p style="font-size:17.5px;line-height:29px;margin:14px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Monrovia, Arcadia, Duarte, Pasadena, Temple City, Rosemead, San Gabriel, Alhambra, Covina, West Covina, Azusa, Glendora, and more.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding-top:18px">
-            <h2 style="font-family:var(--font-heading);font-weight:400;font-size:26px;line-height:1.25;margin:0">Orange County</h2>
-            <p style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:8px 0 0">By arrangement</p>
-            <p style="font-size:17.5px;line-height:29px;margin:14px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">As far as Irvine, booked ahead as one longer visit instead of a weekly slot.</p>
-          </div>
-          <div style="border-top:1px solid var(--color-divider);padding-top:18px">
-            <h2 style="font-family:var(--font-heading);font-weight:400;font-size:26px;line-height:1.25;margin:0">San Diego</h2>
-            <p style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:8px 0 0">By arrangement</p>
-            <p style="font-size:17.5px;line-height:29px;margin:14px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Not a weekly service. Ask, and we won't oversell what we can commit to.</p>
-          </div>
+          {locations.map((loc) => (
+            <div style="border-top:1px solid var(--color-divider);padding-top:18px">
+              <h2 style="font-family:var(--font-heading);font-weight:400;font-size:26px;line-height:1.25;margin:0">{loc.name}</h2>
+              <p style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:8px 0 0">{loc.cadence}</p>
+              <p style="font-size:17.5px;line-height:29px;margin:14px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{loc.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -294,13 +255,12 @@ import { site } from '../lib/site';
       <section id="questions" aria-label="Frequently asked questions" style="padding:calc(2.5*var(--leading)) 0;scroll-margin-top:76px">
         <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 var(--leading)">Frequently asked questions</p>
         <div style="max-width:78ch">
-          <details style="border-top:1px solid var(--color-divider)"><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">What does it cost?<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary><p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">It depends on what your family actually needs — some want very little, some want more, and we work that out together before anything's decided. Rates start at $50 an hour and can go up from there, with driving included on Dawat and Ghar. Ask us what it'd run for your family — no runaround. It's all put in writing before the standing week starts. This is private pay, non-medical help, and nothing is charged before the first visit.</p></details>
-          <details style="border-top:1px solid var(--color-divider)"><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">My parent says they don't need help.<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary><p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">That's the usual starting point. It tends to go better as a visit than as a service. Someone comes for chai, stays a while, and the ride to the doctor happens because they're already there. Most families start with Dawat, four hours a week, and let it grow from there.</p></details>
-          <details style="border-top:1px solid var(--color-divider)"><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">I live out of state. Can I arrange this from here?<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary><p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Yes, and a lot of families do. You book it, we visit, and you get a written update each week on the Dawat and Ghar plans. If something seems off, you'll hear about it from us before you hear about it from your mother.</p></details>
-          <details style="border-top:1px solid var(--color-divider)"><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">My father uses a wheelchair. Can you help?<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary><p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Only if he can get in and out of the car on his own or with family there to help. We don't lift, carry or transfer anyone, and our car has no lift. If that's what's needed, tell us on the call and we'll point you to a licensed provider who can do it properly.</p></details>
-          <details style="border-top:1px solid var(--color-divider)"><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">What if we only speak Hindi, Gujarati or Memoni?<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary><p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Urdu, Hindi, Memoni and English are covered today. Tell us your language on the call and we'll say straight away whether we can match it now or not yet. For a diagnosis or anything legal, ask the clinic for a certified interpreter. We'll make that call for you and sit in alongside them.</p></details>
-          <details style="border-top:1px solid var(--color-divider)"><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">What hours can you visit?<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary><p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Weekdays after 4pm, and weekends open. Morning and midday appointments on a weekday are the one thing we can't cover right now. As we take on more companions, weekday hours will widen, and we'll tell you the moment they do.</p></details>
-          <details style="border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">Do we have to be Muslim?<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary><p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No. We started with our own community because that's where the gap was. Anyone in the service area is welcome, whatever their faith or language, and we'll say plainly if we're the wrong fit.</p></details>
+          {faq.map((item, i) => (
+            <details style={`border-top:1px solid var(--color-divider)${i === faq.length - 1 ? ';border-bottom:1px solid var(--color-divider)' : ''}`}>
+              <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--font-heading);font-size:19px;line-height:1.35">{item.question}<span class="chev" aria-hidden="true" style="flex:none;width:9px;height:9px;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:rotate(45deg);transition:transform .2s"></span></summary>
+              <p style="font-size:17.5px;line-height:29px;margin:0 0 18px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{item.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 
@@ -310,7 +270,7 @@ import { site } from '../lib/site';
         <div>
           <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Book a free call</p>
           <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin:0;max-width:18ch">Tell us about the week you're trying to cover.</h2>
-          <p style="font-size:17px;line-height:var(--leading);margin:18px 0 0;max-width:44ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Three short steps, about two minutes. We'll call you back within one business day, in whichever language you prefer. Nothing is booked and nothing is charged from this form.</p>
+          <p style="font-size:17px;line-height:var(--leading);margin:18px 0 0;max-width:44ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Three short steps, about two minutes. We'll call you back when we're free, in whichever language you prefer. Nothing is booked and nothing is charged from this form.</p>
           <p style="font-size:17px;line-height:var(--leading);margin:var(--leading) 0 0"><a href={`mailto:${site.email}`}>{site.email}</a><br /><span style="color:color-mix(in srgb,var(--color-text) 88%,transparent)">Juveriyah Salat, founder</span></p>
           <p style="font-size:15px;line-height:23px;margin:var(--leading) 0 0;max-width:40ch;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">Don't put medical details in this form. Save those for the call.</p>
         </div>
@@ -325,7 +285,7 @@ import { site } from '../lib/site';
           </div>
 
           <noscript>
-            <p style="font-size:16px;line-height:26px;margin:0 0 var(--leading);padding:12px 14px;border:1px solid var(--color-divider);border-radius:var(--radius-md)">To book a free call, email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}>{site.phone}</a>. Tell us who it's for, your city, and the best time and language to reach you.</p>
+            <p style="font-size:16px;line-height:26px;margin:0 0 var(--leading);padding:12px 14px;border:1px solid var(--color-divider);border-radius:var(--radius-md)">To book a free call, email <a href={`mailto:${site.email}`}>{site.email}</a>, call <a href={site.phoneHref}>{site.phone}</a>, or message on <a href={site.whatsappHref} target="_blank" rel="noopener">WhatsApp</a>. Tell us who it's for, your city, and the best time and language to reach you.</p>
           </noscript>
           <form name="booking" method="POST" id="booking-form" novalidate data-endpoint={site.formEndpoint} data-email={site.email}>
             <p hidden aria-hidden="true"><label>Leave this field blank<input name="company" tabindex="-1" autocomplete="off" /></label></p>
@@ -352,7 +312,7 @@ import { site } from '../lib/site';
                       <option>Monrovia</option><option>Arcadia</option><option>Pasadena</option><option>Duarte</option>
                       <option>Temple City</option><option>Rosemead or San Gabriel</option><option>Alhambra</option>
                       <option>Covina or West Covina</option><option>Elsewhere in the SGV</option><option>Orange County</option>
-                      <option>San Diego</option><option>Somewhere else</option>
+                      <option>Somewhere else</option>
                     </select>
                   </div>
                 </div>
@@ -478,7 +438,7 @@ import { site } from '../lib/site';
               <div style="display:flex;flex-direction:column;gap:14px">
                 <span style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green)">Sent</span>
                 <p data-thanks style="font-family:var(--font-heading);font-size:26px;line-height:1.3;margin:0">Thank you.</p>
-                <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">We'll call <span data-shown-phone>you</span> within one business day, <span data-shown-when>at a good time</span>. If it's urgent, ring <a href={site.phoneHref}>{site.phone}</a> and someone will pick up.</p>
+                <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">We'll call <span data-shown-phone>you</span>, <span data-shown-when>at a good time</span>. For anything urgent, call or text <a href={site.phoneHref}>{site.phone}</a> and we'll get back to you as soon as we can.</p>
                 <p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">There's nothing to pay until after the first visit.</p>
                 <div><button type="button" class="btn btn-ghost" data-restart>Send another</button></div>
               </div>
@@ -501,8 +461,8 @@ import { site } from '../lib/site';
       <div style="display:flex;flex-direction:column;gap:7px">
         <a href={`mailto:${site.email}`} style="text-decoration:none">{site.email}</a>
         <a href={site.phoneHref} style="text-decoration:none">{site.phone}</a>
+        <a href={site.whatsappHref} style="text-decoration:none" target="_blank" rel="noopener">WhatsApp</a>
         <span>Juveriyah Salat, founder</span>
-        <span>Mon to Sat, 9am to 7pm</span>
       </div>
     </div>
   </footer>

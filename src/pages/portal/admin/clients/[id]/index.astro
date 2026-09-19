@@ -1,0 +1,112 @@
+---
+export const prerender = false;
+import Layout from '../../../../../layouts/Layout.astro';
+import PortalHeader from '../../../../../components/PortalHeader.astro';
+import { site } from '../../../../../lib/site';
+import { supabaseAdmin } from '../../../../../lib/supabase';
+
+const admin = supabaseAdmin(Astro.locals.runtime.env);
+const { id } = Astro.params;
+
+let savedMsg = '';
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const updates = {
+    name: String(form.get('name') || '').trim(),
+    phone: String(form.get('phone') || '').trim() || null,
+    plan_tier: String(form.get('plan_tier') || ''),
+    hourly_rate: Number(form.get('hourly_rate') || 50),
+    status: String(form.get('status') || 'active'),
+    assigned_companion: String(form.get('assigned_companion') || '').trim() || null,
+    recurring_day: String(form.get('recurring_day') || '').trim() || null,
+    recurring_time: String(form.get('recurring_time') || '').trim() || null,
+    address: String(form.get('address') || '').trim() || null,
+    city: String(form.get('city') || '').trim() || null,
+    zip: String(form.get('zip') || '').trim() || null,
+    preferred_visit_location: String(form.get('preferred_visit_location') || '').trim() || null,
+    access_notes: String(form.get('access_notes') || '').trim() || null,
+    notes: String(form.get('notes') || '').trim() || null,
+  };
+  const { error } = await admin.from('clients').update(updates).eq('id', id);
+  savedMsg = error ? 'Could not save — try again.' : 'Saved.';
+}
+
+const { data: client } = await admin.from('clients').select('*').eq('id', id).single();
+
+let inArea: boolean | null = null;
+if (client?.city) {
+  const { data: match } = await admin
+    .from('service_areas')
+    .select('id')
+    .ilike('city', client.city.trim())
+    .eq('active', true)
+    .maybeSingle();
+  inArea = !!match;
+}
+---
+<Layout title={`${client?.name || 'Client'} — ${site.name}`} noindex={true}>
+  <PortalHeader admin backHref="/portal/admin/clients" backLabel="All clients" />
+  <main style="max-width:520px;margin:60px auto 100px;padding:0 20px">
+    {!client ? (
+      <p style="font-size:16px">Client not found.</p>
+    ) : (
+      <>
+        <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 24px">{client.name}</h1>
+        <form method="POST" style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+            <div class="field"><label for="name">Name</label><input class="input" id="name" name="name" value={client.name} required /></div>
+            <div class="field"><label for="phone">Phone</label><input class="input" id="phone" name="phone" value={client.phone || ''} /></div>
+          </div>
+          <p style="font-size:14px;color:color-mix(in srgb,var(--color-text) 78%,transparent);margin:0">Email (login): {client.email} — email itself isn't editable here; contact Supabase directly if it truly needs to change.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+            <div class="field">
+              <label for="plan_tier">Plan</label>
+              <select class="input" id="plan_tier" name="plan_tier" required>
+                <option value="chai" selected={client.plan_tier === 'chai'}>Chai</option>
+                <option value="dawat" selected={client.plan_tier === 'dawat'}>Dawat</option>
+                <option value="ghar" selected={client.plan_tier === 'ghar'}>Ghar</option>
+              </select>
+            </div>
+            <div class="field"><label for="hourly_rate">Hourly rate</label><input class="input" id="hourly_rate" name="hourly_rate" type="number" value={client.hourly_rate} required /></div>
+          </div>
+          <div class="field">
+            <label for="status">Status</label>
+            <select class="input" id="status" name="status">
+              <option value="active" selected={client.status === 'active'}>Active</option>
+              <option value="paused" selected={client.status === 'paused'}>Paused</option>
+              <option value="ended" selected={client.status === 'ended'}>Ended (deactivated)</option>
+            </select>
+          </div>
+          <div class="field"><label for="assigned_companion">Assigned companion</label><input class="input" id="assigned_companion" name="assigned_companion" value={client.assigned_companion || ''} /></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+            <div class="field"><label for="recurring_day">Standing day</label><input class="input" id="recurring_day" name="recurring_day" value={client.recurring_day || ''} placeholder="Thursday" /></div>
+            <div class="field"><label for="recurring_time">Standing time</label><input class="input" id="recurring_time" name="recurring_time" value={client.recurring_time || ''} placeholder="4:30 PM" /></div>
+          </div>
+          <div class="field"><label for="address">Address</label><input class="input" id="address" name="address" value={client.address || ''} /></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px">
+            <div class="field"><label for="city">City</label><input class="input" id="city" name="city" value={client.city || ''} /></div>
+            <div class="field"><label for="zip">Zip</label><input class="input" id="zip" name="zip" value={client.zip || ''} /></div>
+          </div>
+          {inArea !== null && (
+            <p style={`font-size:14px;margin:0;${inArea ? '' : 'color:var(--color-accent-700)'}`}>{inArea ? '✓ In the usual service area' : '⚠ Not in the current service area list — check src/data/locations.ts or add it under Service areas'}</p>
+          )}
+          <div class="field"><label for="preferred_visit_location">Preferred visit location</label><input class="input" id="preferred_visit_location" name="preferred_visit_location" value={client.preferred_visit_location || ''} placeholder="Home, unless noted" /></div>
+          <div class="field"><label for="access_notes">Access / parking notes</label><textarea class="input" id="access_notes" name="access_notes" rows="2" style="resize:vertical;font-family:var(--font-body)">{client.access_notes || ''}</textarea></div>
+          <div class="field"><label for="notes">Internal notes</label><textarea class="input" id="notes" name="notes" rows="3" style="resize:vertical;font-family:var(--font-body)">{client.notes || ''}</textarea></div>
+          {savedMsg && <p style="font-size:15px;margin:0">{savedMsg}</p>}
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+        {client.emergency_contact_name && (
+          <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--color-divider)">
+            <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Emergency contact (set by client)</p>
+            <p style="font-size:15.5px;margin:0">{client.emergency_contact_name} — {client.emergency_contact_phone}</p>
+          </div>
+        )}
+        {client.languages && <p style="font-size:15.5px;margin:12px 0 0"><strong>Languages:</strong> {client.languages}</p>}
+        {client.family_preferences && <p style="font-size:15.5px;margin:12px 0 0"><strong>Family notes:</strong> {client.family_preferences}</p>}
+      </>
+    )}
+  </main>
+</Layout>

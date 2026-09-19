@@ -1,0 +1,58 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import PortalHeader from '../../components/PortalHeader.astro';
+import { site } from '../../lib/site';
+
+const { supabase, user } = Astro.locals;
+
+const { data: client } = await supabase
+  .from('clients')
+  .select('*')
+  .eq('auth_user_id', user!.id)
+  .single();
+---
+<Layout title={`Care summary — ${site.name}`} noindex={true}>
+  <PortalHeader backHref="/portal" backLabel="Your account" />
+  <main style="max-width:520px;margin:60px auto 100px;padding:0 20px" class="receipt-main">
+    {!client ? (
+      <p style="font-size:16px">No client record linked to this account yet.</p>
+    ) : (
+      <div style="border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:calc(1.5*var(--leading))">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px">
+          <span style="font-family:var(--font-heading);font-size:20px">{site.name}</span>
+          <span style="font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Care summary</span>
+        </div>
+
+        <p style="font-family:var(--font-heading);font-size:22px;margin:0 0 4px">{client.name}</p>
+        {client.for_relation && <p style="font-size:14.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 20px">Care recipient: {client.for_relation}</p>}
+
+        <table style="width:100%;border-collapse:collapse;font-size:15px">
+          <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Plan</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right;text-transform:capitalize">{client.plan_tier} · ${client.hourly_rate}/hr</td></tr>
+          {client.assigned_companion && <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Companion</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">{client.assigned_companion}</td></tr>}
+          {client.recurring_day && <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Standing visit</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">{client.recurring_day}{client.recurring_time && `, ${client.recurring_time}`}</td></tr>}
+          {client.languages && <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Languages</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">{client.languages}</td></tr>}
+          {(client.emergency_contact_name || client.emergency_contact_phone) && (
+            <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Emergency contact</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">{client.emergency_contact_name} {client.emergency_contact_phone}</td></tr>
+          )}
+          <tr><td style="padding:8px 0;border-top:1px solid var(--color-divider)">Apna contact</td><td style="padding:8px 0;border-top:1px solid var(--color-divider);text-align:right">{site.phone}</td></tr>
+        </table>
+
+        {client.family_preferences && (
+          <div style="margin-top:20px">
+            <p style="font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--green);margin:0 0 6px">Notes and preferences</p>
+            <p style="font-size:15px;line-height:23px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{client.family_preferences}</p>
+          </div>
+        )}
+
+        <button class="btn btn-ghost no-print" style="margin-top:20px;font-size:14px" onclick="window.print()">Print / save as PDF</button>
+      </div>
+    )}
+  </main>
+  <style>
+    @media print {
+      header, .no-print { display: none !important; }
+      main { margin: 0 !important; }
+    }
+  </style>
+</Layout>

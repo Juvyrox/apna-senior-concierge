@@ -1,0 +1,63 @@
+---
+export const prerender = false;
+import Layout from '../../../layouts/Layout.astro';
+import PortalHeader from '../../../components/PortalHeader.astro';
+import { site } from '../../../lib/site';
+import { supabaseAdmin } from '../../../lib/supabase';
+
+const admin = supabaseAdmin(Astro.locals.runtime.env);
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const inquiryId = form.get('inquiry_id');
+  const status = form.get('status');
+  if (inquiryId && status) {
+    await admin.from('booking_requests').update({ status: String(status) }).eq('id', String(inquiryId));
+  }
+}
+
+const { data: inquiries } = await admin
+  .from('booking_requests')
+  .select('*')
+  .order('created_at', { ascending: false })
+  .limit(50);
+
+const { data: areas } = await admin.from('service_areas').select('city').eq('active', true);
+const knownCities = (areas || []).map((a) => a.city.toLowerCase());
+const inServiceArea = (city: string | null) => {
+  if (!city) return null;
+  return knownCities.some((c) => city.toLowerCase().includes(c));
+};
+---
+<Layout title={`Inquiries — ${site.name}`} noindex={true}>
+  <PortalHeader admin backHref="/portal/admin" backLabel="Admin dashboard" />
+  <main style="max-width:680px;margin:60px auto 100px;padding:0 20px">
+    <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 28px">Inquiries</h1>
+
+    {(!inquiries || inquiries.length === 0) && <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No inquiries yet.</p>}
+
+    {(inquiries || []).map((inq) => (
+      <div style="border-top:1px solid var(--color-divider);padding:16px 0">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <p style="margin:0;font-size:16px">{inq.name} <span style="font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">— {inq.phone}{inq.email && `, ${inq.email}`}</span></p>
+          <span style="font-size:13px;text-transform:uppercase;letter-spacing:0.05em;color:var(--green)">{inq.status}</span>
+        </div>
+        <p style="font-size:14.5px;line-height:22px;margin:8px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">
+          {inq.relationship && `For: ${inq.relationship}. `}{inq.city && `City: ${inq.city}. `}{inq.hours && `Hours: ${inq.hours}. `}{inq.best_time && `Best time: ${inq.best_time}.`}
+        </p>
+        {inq.city && (
+          inServiceArea(inq.city)
+            ? <p style="font-size:13px;margin:4px 0 0">✓ In the usual service area</p>
+            : <p style="font-size:13px;margin:4px 0 0;color:var(--color-accent-700)">⚠ Not on the known city list — check before confirming</p>
+        )}
+        {inq.need && <p style="font-size:14.5px;line-height:22px;margin:6px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">"{inq.need}"</p>}
+        <form method="POST" style="display:flex;gap:8px;margin-top:10px">
+          <input type="hidden" name="inquiry_id" value={inq.id} />
+          <button type="submit" name="status" value="contacted" class="btn btn-ghost" style="font-size:13px;padding:5px 10px">Mark contacted</button>
+          <button type="submit" name="status" value="converted" class="btn btn-ghost" style="font-size:13px;padding:5px 10px">Mark converted</button>
+          <button type="submit" name="status" value="declined" class="btn btn-ghost" style="font-size:13px;padding:5px 10px">Mark declined</button>
+        </form>
+      </div>
+    ))}
+  </main>
+</Layout>

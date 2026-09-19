@@ -22,7 +22,7 @@ export const site = {
   email: 'hello@apnaseniorconcierge.com',
   phone: '(510) 437-0136',
   phoneHref: 'tel:+15104370136',
-  officeHours: 'Mon to Sat, 9am to 7pm',
+  whatsappHref: 'https://wa.me/15104370136',
 
   // Service area
   region: 'San Gabriel Valley, California',

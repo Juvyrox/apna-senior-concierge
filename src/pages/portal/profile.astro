@@ -1,0 +1,64 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import PortalHeader from '../../components/PortalHeader.astro';
+import { site } from '../../lib/site';
+import { supabaseAdmin } from '../../lib/supabase';
+
+const { supabase, user } = Astro.locals;
+
+const { data: client } = await supabase
+  .from('clients')
+  .select('*')
+  .eq('auth_user_id', user!.id)
+  .single();
+
+let savedMsg = '';
+
+if (client && Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  // Server controls exactly which columns can be touched here — a client
+  // can never edit their own rate, status, or plan through this route.
+  const updates = {
+    emergency_contact_name: String(form.get('emergency_contact_name') || '').trim() || null,
+    emergency_contact_phone: String(form.get('emergency_contact_phone') || '').trim() || null,
+    languages: String(form.get('languages') || '').trim() || null,
+    family_preferences: String(form.get('family_preferences') || '').trim() || null,
+  };
+  const admin = supabaseAdmin(Astro.locals.runtime.env);
+  const { error } = await admin.from('clients').update(updates).eq('id', client.id).eq('auth_user_id', user!.id);
+  savedMsg = error ? 'Could not save — try again.' : 'Saved.';
+  Object.assign(client, updates);
+}
+---
+<Layout title={`Your profile — ${site.name}`} noindex={true}>
+  <PortalHeader backHref="/portal" backLabel="Your account" />
+  <main style="max-width:480px;margin:60px auto 100px;padding:0 20px">
+    <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 24px">Your profile</h1>
+
+    {!client && <p style="font-size:16px">No client record linked to this account yet.</p>}
+
+    {client && (
+      <form method="POST" style="display:flex;flex-direction:column;gap:16px">
+        <div class="field">
+          <label for="emergency_contact_name">Emergency contact name</label>
+          <input class="input" id="emergency_contact_name" name="emergency_contact_name" value={client.emergency_contact_name || ''} />
+        </div>
+        <div class="field">
+          <label for="emergency_contact_phone">Emergency contact phone</label>
+          <input class="input" id="emergency_contact_phone" name="emergency_contact_phone" value={client.emergency_contact_phone || ''} />
+        </div>
+        <div class="field">
+          <label for="languages">Languages spoken at home</label>
+          <input class="input" id="languages" name="languages" value={client.languages || ''} placeholder="Urdu, English" />
+        </div>
+        <div class="field">
+          <label for="family_preferences">Preferences and notes for us</label>
+          <textarea class="input" id="family_preferences" name="family_preferences" rows="4" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything we should know — routines, things to avoid, what helps">{client.family_preferences || ''}</textarea>
+        </div>
+        {savedMsg && <p style="font-size:15px;margin:0">{savedMsg}</p>}
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    )}
+  </main>
+</Layout>
