@@ -6,7 +6,7 @@ export const hero = {
     { text: 'in English.', italic: true },
   ],
   subhead:
-    'Companions who speak your parent's language, for the market run and the hours in between, across the San Gabriel Valley.',
+    'Companions who speak your parent’s language, for the market run and the hours in between, across the San Gabriel Valley.',
   ctaPrimary: { label: 'Book a free call', href: '#book' },
   ctaSecondary: { label: 'See what we do', href: '#help' },
 };
