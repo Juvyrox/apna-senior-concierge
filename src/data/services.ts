@@ -4,10 +4,6 @@ export type Service = { title: string; body: string };
 
 export const services: Service[] = [
   {
-    title: 'Rides to appointments',
-    body: 'Saturday morning, cardiology. We drive, we park, we walk in, and we sit through it. You get a note afterwards saying what the doctor actually said.',
-  },
-  {
     title: 'Weekend prayers and gatherings',
     body: 'The masjid on a Saturday or Sunday, a janazah, a walima, with a stop at the bakery on the way home.',
   },

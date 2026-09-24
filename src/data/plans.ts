@@ -49,9 +49,10 @@ export const plans: Plan[] = [
     name: 'Ghar',
     hoursLabel: '6 hours a week',
     description:
-      'Six hours over two or three visits. For families living far away, or when one person at home has been carrying all of it alone. Priority scheduling, and Ramadan and Eid hours arranged ahead.',
+      'Six hours over two or three visits, with the car. For families living far away, or when one person at home has been carrying all of it alone. Priority scheduling, and Ramadan and Eid hours arranged ahead.',
     features: [
       { text: 'Two longer visits instead of two short ones' },
+      { text: 'Driving included, in our own car' },
       { text: 'Changes accommodated the same week' },
       { text: 'A standing weekend outing, masjid or park' },
       { text: 'Ramadan and Eid hours planned ahead' },
