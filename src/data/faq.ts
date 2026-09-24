@@ -30,7 +30,7 @@ export const faq: FaqItem[] = [
   {
     question: 'What hours can you visit?',
     answer:
-      "Visits happen on weekends right now — that's where we can actually show up reliably as a new, growing team. Tell us what your weekend looks like and we'll work out a time that fits. Weekday visits will open up as we grow, and we'll tell you the moment they do.",
+      "Weekends. That's when we can actually give your family real, unrushed time — not an hour squeezed between other things. Tell us what your weekend looks like and we'll work out a time that fits.",
   },
   {
     question: 'Do we have to be Muslim?',
