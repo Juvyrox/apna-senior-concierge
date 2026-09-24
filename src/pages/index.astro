@@ -48,7 +48,7 @@ import { locations } from '../data/locations';
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--leading) clamp(32px,6vw,88px);margin-top:calc(1.5*var(--leading));align-items:end">
           <p style="font-size:18.5px;line-height:var(--leading);margin:0;max-width:50ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Apna is a concierge service for older adults in the San Gabriel Valley. We drive them to appointments and stay for the appointment. We do the market run. We sit down for chai. It's not medical care. It's the help a child would give if they lived closer.</p>
-          <p style="font-size:17px;line-height:28px;margin:var(--leading) 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">We speak Urdu, Hindi and English, and we understand Memoni. Arabic and other languages will follow as more families ask for them. Tell us your language and we'll tell you straight whether we can match it yet.</p>
+          <p style="font-size:17px;line-height:28px;margin:var(--leading) 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">Urdu, Hindi, English, and Memoni are covered today. Ask about another language — we're adding more as families need them, and we'll say plainly if we can't match yours yet.</p>
         </div>
       </section>
 
@@ -98,19 +98,39 @@ import { locations } from '../data/locations';
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:calc(1.5*var(--leading)) calc(2*var(--leading))">
           <div class="card">
             <span class="card-kicker" style="font-feature-settings:'tnum' 1;color:var(--green)">One</span>
-            <h3 class="card-title" style="font-weight:400">A call, in whichever language</h3>
-            <p class="card-body" style="line-height:24px;margin:0">Twenty minutes on the phone, free, and the first visit is free too — thirty minutes with your parent. We ask about the week. What's already covered, what keeps slipping, and who's been driving until now.</p>
+            <h3 class="card-title" style="font-weight:400">A free call</h3>
+            <p class="card-body" style="line-height:24px;margin:0">Twenty minutes, in whichever language you prefer. We ask about the week — what's already covered, what keeps slipping, and who's been driving until now.</p>
           </div>
           <div class="card">
             <span class="card-kicker" style="font-feature-settings:'tnum' 1;color:var(--green)">Two</span>
-            <h3 class="card-title" style="font-weight:400">Chai before anything is booked</h3>
-            <p class="card-body" style="line-height:24px;margin:0">We come and sit with your parent first. No clipboard. If it isn't a fit, say so, no questions asked.</p>
+            <h3 class="card-title" style="font-weight:400">We meet your parent</h3>
+            <p class="card-body" style="line-height:24px;margin:0">Chai before anything is booked — thirty minutes, no clipboard. If it isn't a fit, we say so, no questions asked.</p>
           </div>
           <div class="card">
             <span class="card-kicker" style="font-feature-settings:'tnum' 1;color:var(--green)">Three</span>
-            <h3 class="card-title" style="font-weight:400">The same hours, every week</h3>
-            <p class="card-body" style="line-height:24px;margin:0">You pick a plan and we keep to it, under a written service agreement signed before the standing week starts.</p>
+            <h3 class="card-title" style="font-weight:400">A plan built around your week</h3>
+            <p class="card-body" style="line-height:24px;margin:0">You pick a plan and we set the same days and hours, every week, under a written agreement before it starts.</p>
           </div>
+          <div class="card">
+            <span class="card-kicker" style="font-feature-settings:'tnum' 1;color:var(--green)">Four</span>
+            <h3 class="card-title" style="font-weight:400">Visits you can count on</h3>
+            <p class="card-body" style="line-height:24px;margin:0">Same time, every week. And you'll actually know how it went — see below.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="hr" />
+
+      <section aria-label="How you'll know" style="padding:calc(2.5*var(--leading)) 0">
+        <p style="display:block;font-size:14.5px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">How you'll know</p>
+        <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin:0 0 var(--leading);max-width:22ch">"How do I know my mom is okay?"</h2>
+        <p style="font-size:17.5px;line-height:29px;margin:0 0 var(--leading);max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">That's the question every daughter asks first. After every visit, you hear from us — not a form, an actual update:</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 40px;max-width:820px">
+          <span style="font-size:17px;line-height:27px">✓ What actually happened, in a real note</span>
+          <span style="font-size:17px;line-height:27px">✓ How your parent seemed that day</span>
+          <span style="font-size:17px;line-height:27px">✓ A photo, if you'd like one — just ask</span>
+          <span style="font-size:17px;line-height:27px">✓ When we'll be back next</span>
+          <span style="font-size:17px;line-height:27px">✓ Anything worth flagging, before you hear it from your mother</span>
         </div>
       </section>
 
@@ -186,7 +206,7 @@ import { locations } from '../data/locations';
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 calc(2*var(--leading))">
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">The language</h3><p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Urdu at the kitchen table. Nothing gets translated through a grandchild who's at work.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Salah</h3><p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">The day is planned around prayer times. If we're out, we find somewhere clean to pray and we wait.</p></div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">A woman, for now</h3><p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Every companion is a woman at present, since the work is being done by one person. Male companions come once the business is registered as a home care organization.</p></div>
+          <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">A woman, for now</h3><p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Every companion is a woman — the work is being done by one person. Male companions come once the business is registered as a home care organization.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Ramadan and Eid</h3><p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Hours move for suhoor and taraweeh. Eid morning is arranged weeks ahead, not squeezed in.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Adab of the house</h3><p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Shoes off at the door. Elders addressed properly. The kitchen kept the way it's kept.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Asking is the hard part</h3><p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Our elders weren't raised to ask for help. So we don't make anyone say it twice, and we don't make a thing of it.</p></div>
@@ -354,6 +374,7 @@ import { locations } from '../data/locations';
                     <button type="button" class="tag tag-outline day-toggle" aria-pressed="false" data-day="Sun">Sun</button>
                   </div>
                   <input type="hidden" name="days" id="a-days" value="" />
+                  <span style="font-size:14px;line-height:20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Visits themselves happen on weekends right now — tell us the whole picture anyway, it helps us plan ahead.</span>
                 </div>
                 <div class="field">
                   <label for="a-hours">Hours you have in mind</label>
@@ -439,7 +460,7 @@ import { locations } from '../data/locations';
                 <span style="font-size:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green)">Sent</span>
                 <p data-thanks style="font-family:var(--font-heading);font-size:26px;line-height:1.3;margin:0">Thank you.</p>
                 <p style="font-size:17.5px;line-height:29px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">We'll call <span data-shown-phone>you</span>, <span data-shown-when>at a good time</span>. For anything urgent, call or text <a href={site.phoneHref}>{site.phone}</a> and we'll get back to you as soon as we can.</p>
-                <p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">There's nothing to pay until after the first visit.</p>
+                <p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">The first visit is free — nothing's charged unless you decide to continue.</p>
                 <div><button type="button" class="btn btn-ghost" data-restart>Send another</button></div>
               </div>
             </div>

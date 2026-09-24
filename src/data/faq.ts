@@ -23,7 +23,7 @@ export const faq: FaqItem[] = [
       "Only if he can get in and out of the car on his own or with family there to help. We don't lift, carry or transfer anyone, and our car has no lift. If that's what's needed, tell us on the call and we'll point you to a licensed provider who can do it properly.",
   },
   {
-    question: 'What if we only speak Hindi, Gujarati or Memoni?',
+    question: 'What if my parents speak a different language?',
     answer:
       "Urdu, Hindi, Memoni and English are covered today. Tell us your language on the call and we'll say straight away whether we can match it now or not yet. For a diagnosis or anything legal, ask the clinic for a certified interpreter. We'll make that call for you and sit in alongside them.",
   },
