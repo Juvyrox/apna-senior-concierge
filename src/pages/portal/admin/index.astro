@@ -57,7 +57,7 @@ const outstandingTotal = (unpaidInvoices.data || []).reduce((sum, i) => sum + Nu
       <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Today's visits</p>
       {(!todayVisits.data || todayVisits.data.length === 0) && <p style="font-size:15px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Nothing logged for today.</p>}
       {(todayVisits.data || []).map((v: any) => (
-        <div style="padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">{v.clients?.name} — {v.hours} hrs {v.companion && `with ${v.companion}`}</div>
+        <div style="padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">{v.clients?.name} · {v.hours} hrs {v.companion && `with ${v.companion}`}</div>
       ))}
     </section>
 
@@ -66,7 +66,7 @@ const outstandingTotal = (unpaidInvoices.data || []).reduce((sum, i) => sum + Nu
       {(!unpaidInvoices.data || unpaidInvoices.data.length === 0) && <p style="font-size:15px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Nothing outstanding.</p>}
       {(unpaidInvoices.data || []).map((inv: any) => (
         <div style="display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">
-          <span>{inv.clients?.name} — {inv.billing_period}</span>
+          <span>{inv.clients?.name} · {inv.billing_period}</span>
           <span>{money(inv.amount)}</span>
         </div>
       ))}
@@ -79,7 +79,7 @@ const outstandingTotal = (unpaidInvoices.data || []).reduce((sum, i) => sum + Nu
       </div>
       {(!recentInquiries.data || recentInquiries.data.length === 0) && <p style="font-size:15px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Nothing new.</p>}
       {(recentInquiries.data || []).map((inq: any) => (
-        <div style="padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">{inq.name} — {inq.phone}</div>
+        <div style="padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">{inq.name} · {inq.phone}</div>
       ))}
     </section>
   </main>

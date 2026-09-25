@@ -28,7 +28,7 @@ if (Astro.request.method === 'POST' && client) {
     const { error } = await supabase.from('visit_requests').insert({
       client_id: client.id, requested_day, requested_start, requested_end, notes,
     });
-    if (error) errorMsg = 'Could not send the request — try again.';
+    if (error) errorMsg = 'Could not send the request. Try again.';
     else submitted = true;
   }
 }
@@ -38,7 +38,7 @@ if (Astro.request.method === 'POST' && client) {
   <main style="max-width:480px;margin:60px auto 100px;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 8px">Request a visit</h1>
     <p style="font-size:16px;line-height:24px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 24px">
-      This isn't confirmed until we reach back out — visits happen on weekends, minimum two hours, so tell us what works and we'll do our best to match it.
+      This isn't confirmed until we reach back out. Visits happen on weekends, minimum two hours, so tell us what works and we'll do our best to match it.
     </p>
 
     {submitted ? (
@@ -62,13 +62,13 @@ if (Astro.request.method === 'POST' && client) {
               <option value="2 hours">2 hours</option>
               <option value="3 hours">3 hours</option>
               <option value="4 hours">4 hours</option>
-              <option value="Longer — ask us">Longer — ask us</option>
+              <option value="Longer than 4 hours">Longer than 4 hours</option>
             </select>
           </div>
         </div>
         <div class="field">
           <label for="notes">Anything to add</label>
-          <textarea class="input" id="notes" name="notes" rows="3" style="resize:vertical;font-family:var(--font-body)" placeholder="Cardiology appointment that week"></textarea>
+          <textarea class="input" id="notes" name="notes" rows="3" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything we should know about this visit"></textarea>
         </div>
         {errorMsg && <p style="color:var(--color-accent-700);font-size:15px;margin:0">{errorMsg}</p>}
         <button type="submit" class="btn btn-primary">Send request</button>

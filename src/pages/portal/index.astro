@@ -26,7 +26,7 @@ if (client && Astro.request.method === 'POST') {
       .update({ status: 'cancelled' })
       .eq('id', String(cancelId))
       .eq('client_id', client.id);
-    cancelMsg = error ? 'Could not cancel — try again or call us.' : 'Request cancelled.';
+    cancelMsg = error ? 'Could not cancel. Try again or call us.' : 'Request cancelled.';
   }
 }
 
@@ -58,7 +58,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
     )}
 
     {!client && (
-      <p style="font-size:17px;line-height:26px">We don't have a client record linked to this email yet. If you've just booked with Apna, this will appear shortly — otherwise reach out at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p style="font-size:17px;line-height:26px">We don't have a client record linked to this email yet. If you've just booked with Apna, this will appear shortly. Otherwise, reach out at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
     )}
 
     {client && (
@@ -85,7 +85,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
           {invoices.map((inv) => (
             <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--color-divider)">
               <div>
-                <p style="margin:0;font-size:16px">{inv.billing_period} — {inv.hours_billed} hrs</p>
+                <p style="margin:0;font-size:16px">{inv.billing_period} · {inv.hours_billed} hrs</p>
                 <p style="margin:0;font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent);text-transform:capitalize">{inv.status}{inv.status === 'paid' && inv.date_paid && ` on ${inv.date_paid}`}</p>
               </div>
               <div style="display:flex;align-items:center;gap:12px">
@@ -106,7 +106,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
           {visits.length === 0 && <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No visits logged yet.</p>}
           {visits.map((v) => (
             <div style="padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">
-              {v.visit_date} — {v.hours} hrs {v.companion && `with ${v.companion}`}
+              {v.visit_date} · {v.hours} hrs {v.companion && `with ${v.companion}`}
               {v.notes && <span style="display:block;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin-top:2px">{v.notes}</span>}
             </div>
           ))}
@@ -117,7 +117,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
             <p style="font-size:14.5px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Your recent requests</p>
             {visitRequests.map((r) => (
               <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--color-divider);font-size:15.5px">
-                <span>{r.requested_day} {r.requested_start}, {r.requested_end} — <span style="text-transform:capitalize">{r.status}</span></span>
+                <span>{r.requested_day} {r.requested_start}, {r.requested_end} · <span style="text-transform:capitalize">{r.status}</span></span>
                 {(r.status === 'pending' || r.status === 'confirmed') && (
                   <form method="POST" style="margin:0">
                     <input type="hidden" name="cancel_request_id" value={r.id} />
@@ -126,7 +126,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
                 )}
               </div>
             ))}
-            <p style="font-size:13.5px;color:color-mix(in srgb,var(--color-text) 78%,transparent);margin:10px 0 0">Cancelling close to a confirmed visit may not always be possible — call us directly if it's within a day.</p>
+            <p style="font-size:13.5px;color:color-mix(in srgb,var(--color-text) 78%,transparent);margin:10px 0 0">Cancelling close to a confirmed visit may not always be possible. Call us directly if it's within a day.</p>
           </section>
         )}
       </>

@@ -5,22 +5,22 @@ export const faq: FaqItem[] = [
   {
     question: 'What does it cost?',
     answer:
-      "It depends on what your family actually needs — some want very little, some want more, and we work that out together before anything's decided. Rates start at $50 an hour and can go up from there, with driving included on Dawat and Ghar. Ask us what it'd run for your family — no runaround. It's all put in writing before the standing week starts. This is private pay, non-medical help, and nothing is charged before the first visit.",
+      "It depends on your family's actual needs, and we work that out together before anything's decided. Rates start at $50 an hour, with driving included on Dawat and Ghar. Give us your situation on the call and you'll get a real number, not a guess. Nothing charged before the first visit.",
   },
   {
     question: "My parent says they don't need help.",
     answer:
-      "That's the usual starting point. It tends to go better as a visit than as a service. Someone comes for chai, stays a while, and the ride to the doctor happens because they're already there. Most families start with Dawat, four hours a week, and let it grow from there.",
+      "That's the usual starting point. It tends to go better as a visit than as a service. Someone comes for chai, stays a while, and the ride happens because they're already there. Most families start with Dawat, four hours over the weekend, and let it grow from there.",
   },
   {
     question: 'I live out of state. Can I arrange this from here?',
     answer:
-      "Yes, and a lot of families do. You book it, we visit, and you get a written update each week on the Dawat and Ghar plans. If something seems off, you'll hear about it from us before you hear about it from your mother.",
+      "Yes, and a lot of families do. You book it, we visit, and you get a written update each weekend on the Dawat and Ghar plans. If something seems off, you'll hear about it from us before you hear about it from your mother.",
   },
   {
     question: 'My father uses a wheelchair. Can you help?',
     answer:
-      "Only if he can get in and out of the car on his own or with family there to help. We don't lift, carry or transfer anyone, and our car has no lift. If that's what's needed, tell us on the call and we'll point you to a licensed provider who can do it properly.",
+      "Only if he can get in and out of the car on his own or with family there to help. We don't lift, carry or transfer anyone, and our car has no lift. If that's what's needed, we unfortunately can't help with this one right now.",
   },
   {
     question: 'What if my parents speak a different language?',
@@ -30,7 +30,7 @@ export const faq: FaqItem[] = [
   {
     question: 'What hours can you visit?',
     answer:
-      "Weekends. That's when we can actually give your family real, unrushed time — not an hour squeezed between other things. Tell us what your weekend looks like and we'll work out a time that fits.",
+      "Weekends. That's when we can actually give your family real, unrushed time, not an hour squeezed between other things. Tell us what your weekend looks like and we'll work out a time that fits.",
   },
   {
     question: 'Do we have to be Muslim?',

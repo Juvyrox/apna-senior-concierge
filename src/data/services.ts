@@ -9,7 +9,7 @@ export const services: Service[] = [
   },
   {
     title: 'Halal market and groceries',
-    body: 'The good butcher, not the near one. We carry the bags in and put the cold things away.',
+    body: "The butcher two neighborhoods over, because the meat's better there. We carry the bags in and put the cold things away.",
   },
   {
     title: 'Errands and the pharmacy',

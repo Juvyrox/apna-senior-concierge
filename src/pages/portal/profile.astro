@@ -27,7 +27,7 @@ if (client && Astro.request.method === 'POST') {
   };
   const admin = supabaseAdmin(Astro.locals.runtime.env);
   const { error } = await admin.from('clients').update(updates).eq('id', client.id).eq('auth_user_id', user!.id);
-  savedMsg = error ? 'Could not save — try again.' : 'Saved.';
+  savedMsg = error ? 'Could not save. Try again.' : 'Saved.';
   Object.assign(client, updates);
 }
 ---
@@ -54,7 +54,7 @@ if (client && Astro.request.method === 'POST') {
         </div>
         <div class="field">
           <label for="family_preferences">Preferences and notes for us</label>
-          <textarea class="input" id="family_preferences" name="family_preferences" rows="4" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything we should know — routines, things to avoid, what helps">{client.family_preferences || ''}</textarea>
+          <textarea class="input" id="family_preferences" name="family_preferences" rows="4" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything we should know: routines, things to avoid, what helps">{client.family_preferences || ''}</textarea>
         </div>
         {savedMsg && <p style="font-size:15px;margin:0">{savedMsg}</p>}
         <button type="submit" class="btn btn-primary">Save</button>

@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
       {
         price_data: {
           currency: 'usd',
-          product_data: { name: `Apna Senior Concierge — ${invoice.billing_period}` },
+          product_data: { name: `Apna Senior Concierge: ${invoice.billing_period}` },
           unit_amount: Math.round(Number(invoice.amount) * 100),
         },
         quantity: 1,

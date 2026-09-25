@@ -39,7 +39,7 @@ const inServiceArea = (city: string | null) => {
     {(inquiries || []).map((inq) => (
       <div style="border-top:1px solid var(--color-divider);padding:16px 0">
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-          <p style="margin:0;font-size:16px">{inq.name} <span style="font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">— {inq.phone}{inq.email && `, ${inq.email}`}</span></p>
+          <p style="margin:0;font-size:16px">{inq.name} <span style="font-size:14px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">· {inq.phone}{inq.email && `, ${inq.email}`}</span></p>
           <span style="font-size:13px;text-transform:uppercase;letter-spacing:0.05em;color:var(--green)">{inq.status}</span>
         </div>
         <p style="font-size:14.5px;line-height:22px;margin:8px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">
@@ -48,7 +48,7 @@ const inServiceArea = (city: string | null) => {
         {inq.city && (
           inServiceArea(inq.city)
             ? <p style="font-size:13px;margin:4px 0 0">✓ In the usual service area</p>
-            : <p style="font-size:13px;margin:4px 0 0;color:var(--color-accent-700)">⚠ Not on the known city list — check before confirming</p>
+            : <p style="font-size:13px;margin:4px 0 0;color:var(--color-accent-700)">⚠ Not on the known city list. Check before confirming</p>
         )}
         {inq.need && <p style="font-size:14.5px;line-height:22px;margin:6px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">"{inq.need}"</p>}
         <form method="POST" style="display:flex;gap:8px;margin-top:10px">

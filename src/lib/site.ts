@@ -9,7 +9,7 @@ export const site = {
   shortName: 'Apna',
   tagline: "Your parents shouldn't have to explain themselves in English.",
   description:
-    'Apna Senior Concierge provides companions who speak your parents’ language — rides to appointments, the market run, errands and company — across the San Gabriel Valley. Non-medical senior concierge and companion support.',
+    'Apna Senior Concierge provides companions who speak your parents’ language: rides to appointments, the market run, errands and company, across the San Gabriel Valley. Non-medical senior concierge and companion support.',
   founder: 'Juveriyah Salat',
 
   // Canonical production domain (owned domain, not the host subdomain).

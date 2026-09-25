@@ -18,7 +18,7 @@ try {
         email,
         options: { emailRedirectTo: `${site.url}/portal/auth/callback` },
       });
-      if (error) errorMsg = "Couldn't send the link just now — give it a minute and try again.";
+      if (error) errorMsg = "Couldn't send the link just now. Give it a minute and try again.";
       else sent = true;
     } else {
       errorMsg = 'Enter the email you used with Apna.';
@@ -33,7 +33,7 @@ try {
   <main style="max-width:420px;margin:80px auto;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:28px;margin:0 0 8px">Client portal</h1>
     {sent ? (
-      <p style="font-size:17px;line-height:26px">Check your email — we sent a sign-in link to that address. It expires shortly, so use it soon.</p>
+      <p style="font-size:17px;line-height:26px">Check your email. We sent a sign-in link to that address. It expires shortly, so use it soon.</p>
     ) : (
       <form method="POST" style="display:flex;flex-direction:column;gap:14px;margin-top:20px">
         <div class="field">
@@ -42,7 +42,7 @@ try {
         </div>
         {errorMsg && <p style="color:var(--color-accent-700);font-size:15px;margin:0">{errorMsg}</p>}
         <button type="submit" class="btn btn-primary">Send sign-in link</button>
-        <p style="font-size:14px;line-height:20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No password — we email you a one-time link. Use the same email Apna has on file for you. Reach us directly at <a href={`mailto:${site.email}`}>{site.email}</a> if anything's urgent.</p>
+        <p style="font-size:14px;line-height:20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No password. We email you a one-time link. Use the same email Apna has on file for you. Reach us directly at <a href={`mailto:${site.email}`}>{site.email}</a> if anything's urgent.</p>
       </form>
     )}
   </main>

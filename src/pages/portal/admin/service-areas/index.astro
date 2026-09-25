@@ -18,7 +18,7 @@ if (action === 'add') {
   const notes = String(form!.get('notes') || '').trim() || null;
   if (city) {
     const { error } = await admin.from('service_areas').insert({ city, region, zip_codes, notes });
-    msg = error ? 'Could not add — try again.' : `${city} added.`;
+    msg = error ? 'Could not add. Try again.' : `${city} added.`;
   }
 } else if (action === 'toggle') {
   const id = String(form!.get('id'));
@@ -35,7 +35,7 @@ const { data: areas } = await admin.from('service_areas').select('*').order('reg
   <PortalHeader admin backHref="/portal/admin" backLabel="Admin dashboard" />
   <main style="max-width:560px;margin:60px auto 100px;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 8px">Service areas</h1>
-    <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 28px">This is your working list — used to flag whether an inquiry falls in the usual area. It doesn't change what's shown on the public site; edit <code>src/data/locations.ts</code> for that.</p>
+    <p style="font-size:15.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 28px">This is your working list, used to flag whether an inquiry falls in the usual area. It doesn't change what's shown on the public site; edit <code>src/data/locations.ts</code> for that.</p>
 
     {msg && <p style="font-size:15px;margin:0 0 16px">{msg}</p>}
 
@@ -50,7 +50,7 @@ const { data: areas } = await admin.from('service_areas').select('*').order('reg
     {(areas || []).map((a: any) => (
       <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--color-divider)">
         <div>
-          <p style="margin:0;font-size:16px">{a.city} <span style="font-size:13px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">— {a.region}</span>{!a.active && <span style="font-size:12px;color:var(--color-accent-700);margin-left:6px">(inactive)</span>}</p>
+          <p style="margin:0;font-size:16px">{a.city} <span style="font-size:13px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">· {a.region}</span>{!a.active && <span style="font-size:12px;color:var(--color-accent-700);margin-left:6px">(inactive)</span>}</p>
           {a.zip_codes && <p style="margin:0;font-size:13.5px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{a.zip_codes}</p>}
         </div>
         <div style="display:flex;gap:6px">
