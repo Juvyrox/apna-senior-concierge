@@ -5,7 +5,7 @@
 export type Testimonial = {
   quote: string;
   name: string;
-  relation?: string; // e.g. "Daughter of a Dawat client"
+  relation?: string; // e.g. "Child of a Dawat client"
 };
 
 export const testimonials: Testimonial[] = [];

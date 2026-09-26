@@ -25,6 +25,7 @@ export const plans: Plan[] = [
       { text: 'The same day and hour every weekend' },
       { text: 'Errands, mail, and household phone calls' },
       { text: 'Video calls set up with family abroad' },
+      { text: 'A written note to the family after every visit' },
     ],
     ctaLabel: 'Ask about Chai',
   },
@@ -35,13 +36,12 @@ export const plans: Plan[] = [
     badge: 'Most families',
     highlighted: true,
     description:
-      'Four hours split over two visits, with the car. Enough for errands and the grocery run over the same weekend.',
+      'Four hours over the weekend, with the car. One visit, or split into two: whichever fits the week.',
     featuresHeader: 'Everything in Chai, plus',
     features: [
       { text: 'Driving included, in our own car' },
-      { text: 'Two visits each weekend, same days each time' },
+      { text: 'One visit or two, whatever works best' },
       { text: 'We wait with them, whatever it is' },
-      { text: 'A written note to the family each weekend' },
     ],
     ctaLabel: 'Ask about Dawat',
   },
@@ -53,7 +53,7 @@ export const plans: Plan[] = [
       "Six hours in a single day, with the car: one long visit, or two shorter ones with a break between, whatever the day calls for.",
     featuresHeader: 'Everything in Dawat, plus',
     features: [
-      { text: 'One full day, start to finish, same day each weekend' },
+      { text: 'One day, one visit or two, whatever works best' },
       { text: 'Priority scheduling for last-minute changes' },
       { text: 'A standing outing built into the day, masjid or park' },
     ],

@@ -15,10 +15,10 @@ export const faq: FaqItem[] = [
   {
     question: 'I live out of state. Can I arrange this from here?',
     answer:
-      "Yes, and a lot of families do. You book it, we visit, and you get a written update each weekend on the Dawat and Ghar plans. If something seems off, you'll hear about it from us before you hear about it from your mother.",
+      "Yes, and a lot of families do. You book it, we visit, and you get a written update each weekend on the Dawat and Ghar plans. If something seems off, you'll hear about it from us before you hear about it from your parent.",
   },
   {
-    question: 'My father uses a wheelchair. Can you help?',
+    question: 'My parent uses a wheelchair. Can you help?',
     answer:
       "Only if he can get in and out of the car on his own or with family there to help. We don't lift, carry or transfer anyone, and our car has no lift. If that's what's needed, we unfortunately can't help with this one right now.",
   },
