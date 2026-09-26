@@ -5,7 +5,7 @@ export type Service = { title: string; body: string };
 export const services: Service[] = [
   {
     title: 'Weekend prayers and gatherings',
-    body: 'The masjid on a Saturday or Sunday, a janazah, a walima, with a stop at the bakery on the way home.',
+    body: 'The masjid on a Saturday or Sunday. A janazah, a walima, a stop at the bakery on the way home.',
   },
   {
     title: 'Halal market and groceries',
@@ -20,12 +20,8 @@ export const services: Service[] = [
     body: 'Some visits have no errand in them at all. We put the kettle on and stay for the long part of the afternoon.',
   },
   {
-    title: 'Mail, forms and phone calls',
-    body: 'Read out in Urdu, explained properly, and the call to the office made with your parent on the line rather than around them.',
-  },
-  {
-    title: 'Phones and video calls',
-    body: 'WhatsApp working again, the volume fixed, and a call to Karachi that connects on the first try.',
+    title: 'Calls, mail and forms',
+    body: "Mail read and explained in Urdu. WhatsApp fixed when it stops working. A call to Karachi that connects on the first try.",
   },
   {
     title: 'Getting out of the house',

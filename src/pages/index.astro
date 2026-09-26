@@ -46,16 +46,16 @@ import { locations } from '../data/locations';
           <span style="width:26px;height:26px;background-image:var(--tile);background-size:26px 26px;opacity:0.7"></span>
           <span style="height:1px;flex:1;background:var(--color-divider)"></span>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--leading) clamp(32px,6vw,88px);margin-top:calc(1.5*var(--leading));align-items:end">
-          <p style="font-size:19px;line-height:var(--leading);margin:0;max-width:50ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Apna is a concierge service for older adults in the San Gabriel Valley. Driving them where they need to go and staying once we're there, the market run, an afternoon of chai when that's all that's needed. The help a child would give, if they were able to.</p>
-          <p style="font-size:17px;line-height:28px;margin:var(--leading) 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">Urdu, Hindi, English, and Memoni are covered today. Ask about another language. We're working on expanding language coverage as more families need it.</p>
+        <div style="margin-top:calc(1.5*var(--leading))">
+          <p style="font-size:19px;line-height:var(--leading);margin:0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Apna is a concierge service for older adults in the San Gabriel Valley. Driving them where they need to go and staying once we're there, the market run, an afternoon of chai when that's all that's needed. The help a child would give, if they were able to.</p>
+          <p style="font-size:17px;line-height:28px;margin:var(--leading) 0 0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">Urdu, Hindi, English, and Memoni are covered today. Ask about another language. We're working on expanding language coverage as more families need it.</p>
         </div>
       </section>
 
       <hr class="hr" />
 
       <section aria-label="At a glance" style="padding:calc(2*var(--leading)) 0">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:calc(1.5*var(--leading)) var(--leading)">
+        <div style="display:flex;flex-wrap:wrap;gap:calc(2.5*var(--leading))">
           {availability.stats.map((stat) => (
             <div>
               <p style={`font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.3;margin:0;${stat.accent ? 'color:var(--green);' : ''}${stat.tabularNums ? "font-feature-settings:'tnum' 1;" : ''}`} set:html={stat.value.replace('\n', '<br />')} />
@@ -109,7 +109,7 @@ import { locations } from '../data/locations';
           <div class="card">
             <span class="card-kicker" style="font-feature-settings:'tnum' 1;color:var(--green)">Three</span>
             <h3 class="card-title" style="font-weight:400">A plan built around your week</h3>
-            <p class="card-body" style="line-height:24px;margin:0">You pick a plan and we set the same days and hours, every week, under a written agreement before it starts.</p>
+            <p class="card-body" style="line-height:24px;margin:0">You pick a plan. We set the same days and hours every week, under a written agreement before it starts.</p>
           </div>
           <div class="card">
             <span class="card-kicker" style="font-feature-settings:'tnum' 1;color:var(--green)">Four</span>
@@ -178,14 +178,13 @@ import { locations } from '../data/locations';
             <li style="font-size:17px;line-height:28px;display:grid;grid-template-columns:14px 1fr;gap:12px"><span aria-hidden="true" style="color:var(--color-accent);line-height:28px">·</span><span>Reading and explaining mail, forms and letters</span></li>
             <li style="font-size:17px;line-height:28px;display:grid;grid-template-columns:14px 1fr;gap:12px"><span aria-hidden="true" style="color:var(--color-accent);line-height:28px">·</span><span>Cooking alongside you, and eating at the same table</span></li>
             <li style="font-size:17px;line-height:28px;display:grid;grid-template-columns:14px 1fr;gap:12px"><span aria-hidden="true" style="color:var(--color-accent);line-height:28px">·</span><span>Medication reminders, prompting only, never doses</span></li>
-            <li style="font-size:17px;line-height:28px;display:grid;grid-template-columns:14px 1fr;gap:12px"><span aria-hidden="true" style="color:var(--color-accent);line-height:28px">·</span><span>A written note to the family after every visit</span></li>
           </ul>
         </div>
         <div>
           <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">The driving</p>
           <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.25;margin:0;max-width:18ch">The ride isn't the service. Staying is.</h2>
           <p style="font-size:17px;line-height:var(--leading);margin:16px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">A rideshare leaves your parent at the bank counter with a form they don't fully follow. We park, walk in, sit down, help them through it, and drive home by way of the market. It's one visit, billed by the hour.</p>
-          <p style="font-size:17px;line-height:var(--leading);margin:16px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Driving is in our own vehicle. If your parent would rather use their own car, that works too, with the owner's written permission.</p>
+          <p style="font-size:17px;line-height:var(--leading);margin:16px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Driving is in our own vehicle. Their own car works too, with the owner's written permission.</p>
         </div>
       </section>
 
@@ -197,7 +196,6 @@ import { locations } from '../data/locations';
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 calc(2*var(--leading))">
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">The language</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Urdu at the kitchen table. Nothing gets translated through a grandchild who's at work.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Salah</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">The day is planned around prayer times. If we're out, we find somewhere clean to pray and we wait.</p></div>
-          <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Woman-owned, woman-led</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Every visit is with a woman. For a parent who's more comfortable that way, it's one less thing to explain or negotiate.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Adab of the house</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Shoes off at the door. Elders addressed properly. The kitchen kept the way it's kept.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Asking is the hard part</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Our elders weren't raised to ask for help. So we don't make anyone say it twice, and we don't make a thing of it.</p></div>
         </div>
@@ -217,11 +215,11 @@ import { locations } from '../data/locations';
             ))}
             <p style="font-family:var(--font-heading);font-size:21px;line-height:1.4;margin:22px 0 0">{team[0].name}<span style="display:block;font-family:var(--font-body);font-size:15px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin-top:4px">{team[0].role}</span></p>
           </div>
-          <div style="display:flex;flex-direction:column;gap:var(--leading);align-self:end">
+          <div style="display:flex;flex-direction:column;gap:var(--leading)">
             <div>
               <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 10px">How to check us out</p>
-              <p style="font-size:15px;line-height:23px;margin:0;max-width:40ch;color:color-mix(in srgb,var(--color-text) 78%,transparent)">Meet us before you commit to anything, and read the paperwork first. The first visit is free: thirty minutes, nothing to sign.</p>
-              <p style="font-size:15px;line-height:23px;margin:12px 0 0;max-width:40ch;color:color-mix(in srgb,var(--color-text) 78%,transparent)">Once you decide to continue, a written service agreement sets out rates, scope and terms; visits are cancelled or moved with 24 hours' notice, always. If something matters to you that isn't listed above, ask us and we are happy to provide an answer.</p>
+              <p style="font-size:15px;line-height:23px;margin:0;max-width:40ch;color:color-mix(in srgb,var(--color-text) 78%,transparent)">Meet us before you commit to anything. The first visit is free: thirty minutes, nothing to sign.</p>
+              <p style="font-size:15px;line-height:23px;margin:12px 0 0;max-width:40ch;color:color-mix(in srgb,var(--color-text) 78%,transparent)">Once you decide to continue we put a written agreement in place covering rates, scope and terms. Visits move or cancel with 24 hours' notice, always. Ask us anything not covered here.</p>
             </div>
           </div>
         </div>
@@ -248,7 +246,7 @@ import { locations } from '../data/locations';
     )}
 
     <div style="max-width:1180px;margin:0 auto;padding:0 var(--edge)">
-      <section id="area" style="padding:calc(1.4*var(--leading)) 0;scroll-margin-top:76px">
+      <section id="area" style="padding:calc(0.7*var(--leading)) 0 calc(1.4*var(--leading));scroll-margin-top:76px">
         <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 12px">Where we go</p>
         <p style="font-size:17px;line-height:28px;margin:0;max-width:74ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">
           {locations.map((loc, i) => (
