@@ -1,62 +1,61 @@
-// FAQ — add a question by adding an object to this array. Rendered in order.
+// FAQ: add a question by adding an object to this array. Rendered in order.
 export type FaqItem = { question: string; answer: string };
 
 export const faq: FaqItem[] = [
   {
     question: 'What does it cost?',
     answer:
-      "It depends on your family's actual needs. We work that out together before anything's decided. Rates start at $50 an hour. Tell us your situation on the call and we'll give you a number on the spot. Nothing charged before the first visit.",
+      "Rates start at $50 an hour. The exact amount depends on your family's needs, and we will give you a figure on the call. The first visit is free.",
   },
   {
     question: "My parent says they don't need help.",
     answer:
-      "That's the usual starting point. It tends to go better as a visit than as a service. Someone comes for chai and stays a while. The ride happens because they're already there. Most families start with Dawat, four hours over the weekend. It grows from there.",
+      "This is very common. Many parents accept help more readily as a visit than as a service, so we begin with chai and conversation. Errands and outings usually follow once they are comfortable.",
   },
   {
     question: 'I live out of state. Can I arrange this from here?',
     answer:
-      "Yes, a lot of families do. You book it, we visit. You get a written update every weekend, whichever plan you're on. If something seems off, you'll hear about it from us before you hear about it from your parent.",
+      'Yes, many families do. You arrange the visits and receive a written note after each one. If anything needs your attention, we will contact you directly.',
   },
   {
     question: 'My parent uses a wheelchair. Can you help?',
     answer:
-      "Only if they can get in and out of the car on their own or with family there to help. We don't lift, carry or transfer anyone. Our car has no lift. If that's what's needed, we unfortunately can't help with this one right now.",
+      'We can assist only if your parent is able to get in and out of a car independently or with a family member\'s help, as we do not lift, carry or transfer anyone. If that is needed, we are unfortunately unable to help at this time.',
   },
   {
     question: 'What if my parents speak a different language?',
     answer:
-      "Urdu, Hindi, Memoni and English are covered today. Tell us your language on the call and we'll say straight away whether we can match it now or not yet.",
+      'We currently offer Urdu, Hindi, Memoni and English. If your parent speaks another language, please tell us on the call and we will let you know whether we can accommodate it.',
   },
   {
     question: 'What hours can you visit?',
     answer:
-      "Weekends. That's when we can actually give your family real, unrushed time. Not an hour squeezed between other things. Tell us what your weekend looks like and we'll work out a time that fits.",
+      'Visits take place on weekends. Tell us what your weekend looks like and we will find a time that suits.',
   },
   {
     question: 'Do we have to be Muslim?',
     answer:
-      "No. We started with our own community because that's where the gap was. Anyone in the service area is welcome, whatever their faith or language. We'll tell you straight if we're the wrong fit.",
+      'No. We began with our own community because that is where we saw the need, and families of any faith are welcome. If we are not the right fit, we will tell you.',
   },
   {
-    // Keep in sync with src/data/locations.ts — same facts, this is just
-    // the FAQ-format restatement.
+    // Keep in sync with src/data/locations.ts (same facts, FAQ wording).
     question: 'Where do you serve?',
     answer:
-      "San Gabriel Valley, with regular weekly visits: Monrovia, Arcadia, Duarte, Pasadena, Temple City, Rosemead, San Gabriel, Alhambra, Covina, West Covina, Azusa, Glendora, and more. Orange County too, as far as Irvine, by request as one longer visit instead of a weekly slot.",
+      'The San Gabriel Valley, including Monrovia, Arcadia, Duarte, Pasadena, Temple City, Rosemead, San Gabriel, Alhambra, Covina, West Covina, Azusa and Glendora. Orange County is available by request.',
   },
   {
-    question: "What if you're sick or can't make a visit?",
+    question: "What if you can't make a scheduled visit?",
     answer:
-      "Things come up. Since it's just me right now, if I can't make a visit you'll hear from me directly and as early as possible. We reschedule together. I don't send a substitute stranger. If a particular week matters more than most, tell us on the call and we'll be clear about that going in.",
+      'If we are unable to make a visit, we will let you know as early as possible and arrange another time with you.',
   },
   {
-    question: 'How is this different from an agency or a site like Care.com?',
+    question: 'How is Apna different from an agency?',
     answer:
-      "An agency sends whoever's available that day. A site like Care.com hands you a list of strangers to vet yourself. Here it's one person, the same one every time. I already know your parent's language, habits and week. You're not managing a rotating roster. You're calling one number.",
+      'Apna is a personal service rather than a staffing agency. Families have one point of contact, and visits are made by the same companion wherever possible.',
   },
   {
     question: 'What if we need to pause or stop?',
     answer:
-      "Tell us and we'll work it out. No contract locking you in, and no penalty for pausing if your parent's needs change. The written agreement covers the standing arrangement, not a commitment you can't get out of.",
+      'Please let us know and we will work with you. The details are set out in the written agreement.',
   },
 ];

@@ -11,10 +11,10 @@ export const team: TeamMember[] = [
   {
     name: 'Juveriyah Salat',
     role: 'Founder, Apna Senior Concierge',
-    headline: 'I started this for my grandparents.',
+    headline: "Apna began with my grandparents.",
     bioParagraphs: [
-      'There was no one to help the elders in our community who spoke the language. Most of my grandparents have passed now. They needed support, and asking for it was the hardest part for them. I didn\'t want that to be the reality for anyone else\'s grandparents here.',
-      'I\'ve been in Southern California since 2016. My husband grew up here and has been part of IOK and ICSGV for more than twenty-five years. My family is part of the MCC Community in San Diego. My mother and mother-in-law both work in childcare, so looking after people is not new in our family.',
+      "My grandparents needed support in their own language, and there was no one in our community to give it. Asking for help was the hardest part for them. Most of them have passed now, and I wanted other families here to have something better.",
+      "I have lived in Southern California since 2016. My husband grew up here and has been part of IOK and ICSGV for more than twenty-five years, while my own family is part of the MCC community in San Diego. My mother and mother-in-law both work in childcare, so caring for others has long been part of our family.",
     ],
   },
 ];
