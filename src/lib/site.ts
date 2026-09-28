@@ -19,7 +19,7 @@ export const site = {
   url: 'https://apna-senior-concierge.skyscaper1.workers.dev',
 
   // Contact
-  email: 'hello@apnaseniorconcierge.com',
+  email: 'info@apnaseniorconcierge.com',
   phone: '(510) 437-0136',
   phoneHref: 'tel:+15104370136',
   whatsappHref: 'https://wa.me/15104370136',

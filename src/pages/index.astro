@@ -5,10 +5,8 @@ import { hero } from '../data/hero';
 import { services } from '../data/services';
 import { plans } from '../data/plans';
 import { faq } from '../data/faq';
-import { availability } from '../data/availability';
 import { testimonials } from '../data/testimonials';
 import { team } from '../data/team';
-import { locations } from '../data/locations';
 ---
 <Layout>
   <nav class="nav" aria-label="Primary" style="position:sticky;top:0;z-index:30;background:var(--color-bg);flex-wrap:wrap;row-gap:8px;border-bottom:1px solid var(--color-divider);padding-inline:max(var(--edge),calc((100% - 1180px)/2 + var(--edge)))">
@@ -19,7 +17,7 @@ import { locations } from '../data/locations';
     <a href="#help" style="white-space:nowrap;font-size:15px;text-decoration:none">What we do</a>
     <a href="#plans" style="white-space:nowrap;font-size:15px;text-decoration:none">Plans</a>
     <a href="#about" style="white-space:nowrap;font-size:15px;text-decoration:none">About</a>
-    <a href="#area" style="white-space:nowrap;font-size:15px;text-decoration:none">Area</a>
+    <a href="#questions" style="white-space:nowrap;font-size:15px;text-decoration:none">Area</a>
     <a href="#questions" style="white-space:nowrap;font-size:15px;text-decoration:none">FAQ</a>
     <a href="/portal/login" style="white-space:nowrap;font-size:15px;text-decoration:none;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Client portal</a>
     <a class="btn btn-primary" href="#book" style="white-space:nowrap">Book a call</a>
@@ -49,19 +47,6 @@ import { locations } from '../data/locations';
         <div style="margin-top:calc(1.5*var(--leading))">
           <p style="font-size:19px;line-height:var(--leading);margin:0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Apna is a concierge service for older adults in the San Gabriel Valley. Driving them where they need to go and staying once we're there, the market run, an afternoon of chai when that's all that's needed. The help a child would give, if they were able to.</p>
           <p style="font-size:17px;line-height:28px;margin:var(--leading) 0 0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">Urdu, Hindi, English, and Memoni are covered today. Ask about another language. We're working on expanding language coverage as more families need it.</p>
-        </div>
-      </section>
-
-      <hr class="hr" />
-
-      <section aria-label="At a glance" style="padding:calc(2*var(--leading)) 0">
-        <div style="display:flex;flex-wrap:wrap;gap:calc(2.5*var(--leading))">
-          {availability.stats.map((stat) => (
-            <div>
-              <p style={`font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.3;margin:0;${stat.accent ? 'color:var(--green);' : ''}${stat.tabularNums ? "font-feature-settings:'tnum' 1;" : ''}`} set:html={stat.value.replace('\n', '<br />')} />
-              <p style="font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:14px 0 0">{stat.label}</p>
-            </div>
-          ))}
         </div>
       </section>
     </div>
@@ -132,6 +117,11 @@ import { locations } from '../data/locations';
           <span style="font-size:17px;line-height:28px">✓ When we'll be back next</span>
           <span style="font-size:17px;line-height:28px">✓ Anything worth flagging, before you hear it from your parent</span>
         </div>
+      </section>
+
+      <section aria-label="Everything in one place" style="padding:0 0 calc(2.5*var(--leading))">
+        <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Everything in one place</p>
+        <p style="font-size:17px;line-height:28px;margin:0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Once you're a client, a private account gives you the visit history, the upcoming schedule, and every invoice. Request a schedule change any time, from your phone. <a href="/portal/login">See the client portal &rarr;</a></p>
       </section>
 
       <hr class="hr" />
@@ -246,19 +236,6 @@ import { locations } from '../data/locations';
     )}
 
     <div style="max-width:1180px;margin:0 auto;padding:0 var(--edge)">
-      <section id="area" style="padding:calc(0.7*var(--leading)) 0 calc(1.4*var(--leading));scroll-margin-top:76px">
-        <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 12px">Where we go</p>
-        <p style="font-size:17px;line-height:28px;margin:0;max-width:74ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">
-          {locations.map((loc, i) => (
-            <>
-              <strong style="color:var(--color-text);font-weight:600">{loc.name}:</strong> {loc.description}{i < locations.length - 1 && ' '}
-            </>
-          ))}
-        </p>
-      </section>
-
-      <hr class="hr" />
-
       <section id="questions" aria-label="Frequently asked questions" style="padding:calc(2.5*var(--leading)) 0;scroll-margin-top:76px">
         <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 var(--leading)">Frequently asked questions</p>
         <div style="max-width:78ch">
@@ -367,7 +344,7 @@ import { locations } from '../data/locations';
                 </div>
                 <div class="field">
                   <label for="a-need">What's going unhandled right now?</label>
-                  <textarea class="input" id="a-need" name="need" rows="4" style="resize:vertical;font-family:var(--font-body);line-height:24px" placeholder="Nobody free to drive on Fridays. He hasn't been to Jummah since March, and the pharmacy calls keep piling up."></textarea>
+                  <textarea class="input" id="a-need" name="need" rows="4" style="resize:vertical;font-family:var(--font-body);line-height:24px" placeholder="Nobody free to drive on weekends anymore, and the pharmacy calls keep piling up."></textarea>
                 </div>
                 <div class="field">
                   <label for="a-before">Have you used something like this before?</label>
@@ -449,13 +426,15 @@ import { locations } from '../data/locations';
           </form>
         </div>
       </section>
+
+      <hr class="hr" />
+
+      <section aria-label="Referrals" style="padding:calc(1.2*var(--leading)) 0 calc(1.6*var(--leading))">
+        <p style="display:block;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Know a family who'd want this?</p>
+        <p style="font-size:16px;line-height:25px;margin:0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">We grow through word of mouth, not ads. If a family in your circle could use this, an introduction means a lot. Send them to <a href={site.url}>{site.url.replace('https://', '')}</a> or just pass along <a href={site.phoneHref}>{site.phone}</a>.</p>
+      </section>
     </div>
   </main>
-
-  <div style="max-width:1180px;margin:0 auto;padding:0 var(--edge) calc(1.5*var(--leading))">
-    <p style="display:block;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--green);margin:0 0 10px">What we don't do</p>
-    <p style="font-size:13px;line-height:22px;color:color-mix(in srgb,var(--color-text) 80%,transparent);margin:0;max-width:74ch">No lifting, carrying or transferring: we can steady a door, not move someone in or out of a chair, bed or car. No hands-on personal care, like bathing, dressing or toileting. No medication or nursing tasks: reminders only, never a dose, injection or wound care. No medical transport: no gurney, wheelchair lift, or in-transit monitoring.</p>
-  </div>
 
   <div class="ornament-strip" aria-hidden="true"></div>
 
@@ -463,14 +442,12 @@ import { locations } from '../data/locations';
     <div style="max-width:1180px;margin:0 auto;padding:calc(2*var(--leading)) var(--edge);display:flex;flex-wrap:wrap;gap:var(--leading) calc(2*var(--leading));justify-content:space-between;font-size:13px;line-height:22px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">
       <div style="max-width:64ch">
         <p style="margin:0 0 10px;color:var(--color-text);font-family:var(--font-heading);font-size:19px">Apna Senior Concierge · San Gabriel Valley, California</p>
-        <p style="margin:0 0 12px">Non-medical companion, errand and transportation-assistance services. Apna is not a licensed home care organization, home health agency, hospice or charter-party carrier, and provides no medical, nursing, legal, immigration or financial services or advice. We do not lift, carry or transfer clients, administer medication, or perform any task requiring a license. Driving is provided as part of hourly companion visits and is not sold as a separate fare. Services are open to everyone in the service area regardless of faith, national origin, disability or any other characteristic protected under California law.</p>
+        <p style="margin:0 0 12px">Non-medical companion, errand and transportation-assistance services. Apna is not a licensed home care organization, home health agency, hospice or charter-party carrier. We provide no medical, nursing, legal, immigration or financial services or advice, and do not administer medication, injections or wound care. We do not lift, carry or transfer clients, and provide no hands-on personal care such as bathing, dressing or toileting. There is no medical transport: no gurney, wheelchair lift, or in-transit monitoring. Driving is provided as part of hourly companion visits and is not sold as a separate fare. Services are open to everyone in the service area regardless of faith, national origin, disability or any other characteristic protected under California law.</p>
         <p style="margin:0"><a href="/privacy/" style="color:var(--color-accent-700)">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms/" style="color:var(--color-accent-700)">Terms of Service</a></p>
       </div>
       <div style="display:flex;flex-direction:column;gap:7px">
         <a href={`mailto:${site.email}`} style="text-decoration:none">{site.email}</a>
         <a href={site.phoneHref} style="text-decoration:none">{site.phone}</a>
-        <a href={site.whatsappHref} style="text-decoration:none" target="_blank" rel="noopener">WhatsApp</a>
-        <span>Juveriyah Salat, founder</span>
       </div>
     </div>
   </footer>
