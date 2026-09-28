@@ -9,14 +9,12 @@ export const site = {
   shortName: 'Apna',
   tagline: "Your parents shouldn't have to explain themselves in English.",
   description:
-    'Apna Senior Concierge provides companions who speak your parents’ language: rides to appointments, the market run, errands and company, across the San Gabriel Valley. Non-medical senior concierge and companion support.',
+    'Non-medical companionship, errands and transportation assistance for older adults in the San Gabriel Valley, with companions who speak your parents’ language.',
   founder: 'Juveriyah Salat',
 
-  // Canonical production domain (owned domain, not the host subdomain).
-  // TEMPORARY: using the live .workers.dev address until apnaseniorconcierge.com
-  // is actually connected to this Cloudflare Worker (custom domain). Once that's
-  // done, switch this back to 'https://apnaseniorconcierge.com'.
-  url: 'https://apna-senior-concierge.skyscaper1.workers.dev',
+  // Canonical production domain. Single source of truth for canonical tags,
+  // sitemap, robots.txt, login and Stripe redirects.
+  url: 'https://apnaseniorconcierge.com',
 
   // Contact
   email: 'info@apnaseniorconcierge.com',
