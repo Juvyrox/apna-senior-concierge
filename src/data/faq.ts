@@ -5,7 +5,7 @@ export const faq: FaqItem[] = [
   {
     question: 'What does it cost?',
     answer:
-      "Rates start at $50 an hour. The exact amount depends on your family's needs, and we will give you a figure on the call. The first visit is free.",
+      "Rates start at $50 an hour. The exact amount depends on your family's needs, and we will give you a figure on the call.",
   },
   {
     question: "My parent says they don't need help.",
