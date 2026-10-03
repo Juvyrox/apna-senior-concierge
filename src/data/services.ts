@@ -5,11 +5,11 @@ export type Service = { title: string; body: string };
 export const services: Service[] = [
   {
     title: 'Weekend prayers and gatherings',
-    body: 'The masjid on a Saturday or Sunday, or a janazah or walima, with a stop at the bakery on the way home.',
+    body: 'The masjid some Saturdays, a janazah or walima on others. We stop at the bakery on the way home.',
   },
   {
     title: 'Halal market and groceries',
-    body: "The halal butcher across town, if that is where your parent prefers to shop. We carry the bags in and put the cold things away.",
+    body: "The halal butcher across town, the one they've always used. We carry the bags in and put the cold things away.",
   },
   {
     title: 'Errands and the pharmacy',
@@ -21,10 +21,10 @@ export const services: Service[] = [
   },
   {
     title: 'Calls, mail and forms',
-    body: "Mail read and explained in Urdu, and phones and WhatsApp set up to reach family abroad.",
+    body: "Mail read and explained in Urdu. Phones and WhatsApp set up so family abroad are one call away.",
   },
   {
     title: 'Getting out of the house',
-    body: "Outings to the park, the senior centre, a friend's home or a family wedding. We go along and stay for the visit.",
+    body: "The park, the senior centre, a friend's home, a family wedding. We stay for the visit, not just the ride.",
   },
 ];

@@ -18,7 +18,7 @@ export const plans: Plan[] = [
     slug: 'chai',
     name: 'Chai',
     hoursLabel: '2 hours a weekend',
-    description: "For families who mostly need company and small errands close to home.",
+    description: "A good starting point if your parent mostly needs company and a hand with small errands.",
     featuresHeader: 'Includes',
     features: [
       { text: 'The same day and hour every weekend' },
@@ -33,7 +33,7 @@ export const plans: Plan[] = [
     hoursLabel: '4 hours a weekend',
     badge: 'Most families',
     highlighted: true,
-    description: "For families who need help with errands, groceries and getting around.",
+    description: "The one most families land on, once driving and a longer visit come into the picture.",
     featuresHeader: 'Everything in Chai, plus',
     features: [
       { text: 'Driving included, in our own car' },
@@ -46,11 +46,11 @@ export const plans: Plan[] = [
     slug: 'ghar',
     name: 'Ghar',
     hoursLabel: '6 hours in a day',
-    description: "For families who live farther away or have been managing on their own.",
+    description: "Built for families farther away, or when one person has been carrying all of it alone.",
     featuresHeader: 'Everything in Dawat, plus',
     features: [
       { text: 'One full day, in one visit or two' },
-      { text: 'Priority scheduling for last-minute changes' },
+      { text: 'We make room for last-minute changes' },
       { text: 'A regular outing during the day, such as the masjid or a park' },
     ],
     ctaLabel: 'Ask about Ghar',
