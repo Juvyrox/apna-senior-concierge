@@ -1,3 +1,5 @@
+import { site } from '../lib/site';
+
 // FAQ: add a question by adding an object to this array. Rendered in order.
 export type FaqItem = { question: string; answer: string };
 
@@ -5,7 +7,7 @@ export const faq: FaqItem[] = [
   {
     question: 'What does it cost?',
     answer:
-      "Rates start at $50 an hour, and go up depending on what you need. Call us and we'll work out pricing together.",
+      `Visits are billed by the hour at ${site.rateHourly}, with a two-hour minimum. ${site.foundingNote} Rates are set out in the written agreement before visits begin, and any later change comes with at least 60 days' written notice.`,
   },
   {
     question: "My parent says they don't need help.",

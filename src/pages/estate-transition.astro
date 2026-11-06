@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../lib/site';
+
+const title = `Estate Transition Concierge — ${site.name}`;
+const description = "Logistics and operations support for families when a parent's home changes hands. San Gabriel Valley.";
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Estate Transition Concierge',
+  description,
+  provider: { '@type': 'ProfessionalService', name: site.name, url: site.url },
+  areaServed: site.region,
+};
+---
+<Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <nav class="nav" aria-label="Primary" style="position:sticky;top:0;z-index:30;background:var(--color-bg);flex-wrap:wrap;row-gap:8px;border-bottom:1px solid var(--color-divider);padding-inline:var(--edge)">
+    <a class="nav-brand" href="/" aria-label="Apna Senior Concierge home" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit">
+      <img src="/apna-logo.svg" alt="Apna Senior Concierge" height="52" style="display:block;height:52px;width:auto" />
+    </a>
+    <a href="/" style="white-space:nowrap;font-size:15px;text-decoration:none">Home</a>
+    <a class="btn btn-primary" href="/#book" style="white-space:nowrap">Book a call</a>
+  </nav>
+
+  <main id="main" class="legal">
+    <p style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Estate Transition Concierge</p>
+    <h1>Someone from your community to hold the details.</h1>
+
+    <p class="lead">Settling a parent's home brings many small tasks: who to call, who needs access, what happens next. If your family is spread out, or simply grieving, it helps to have one steady person coordinating. That is what we do: the logistics and operations of the home, handled with care.</p>
+
+    <h2>What we do</h2>
+    <ul>
+      <li>Build a simple task list and timeline with your family</li>
+      <li>Schedule and meet estate sale companies, donation pickups, cleaners, movers and other vendors at the home</li>
+      <li>Organize papers into labeled folders for your family or attorney</li>
+      <li>Make calls in your parent's language, with your permission</li>
+      <li>Send a written update to the family after every visit</li>
+      <li>Honor your family's customs and timing as you direct</li>
+    </ul>
+
+    <h2>What we do not do</h2>
+    <p>We do not give legal, tax or financial advice, handle money or accounts, appraise belongings, or lift, haul or clean. We work alongside your attorney, your advisors and the vendors you choose, and we can suggest people from the community to speak with.</p>
+
+    <h2>How we look after the home</h2>
+    <ul>
+      <li>We act only with written authorization from the family member who has the authority to give it</li>
+      <li>A family member or named person is responsible for access to the home</li>
+      <li>We take photos on a walk-through at the start and again at the end</li>
+      <li>No valuables, cash or documents of value leave the home</li>
+      <li>You choose and pay the vendors yourselves, and we take no referral fees from them</li>
+    </ul>
+
+    <h2>How it works</h2>
+    <ol style="padding-left:22px;margin:0 0 var(--leading)">
+      <li style="font-size:17px;line-height:29px;margin-bottom:8px">A free 30-minute consultation. Tell us about your family and the home.</li>
+      <li style="font-size:17px;line-height:29px;margin-bottom:8px">We send a written estimate and agree on a plan and schedule before anything begins. Visits take place on weekends.</li>
+      <li style="font-size:17px;line-height:29px;margin-bottom:8px">We coordinate, and your family receives an update after each visit.</li>
+    </ol>
+
+    <h2>What it costs</h2>
+    <p>{site.estateRate}, with a four-hour minimum. The total depends on the size of the project: a few tasks take far less time than settling a whole home. After the free consultation we give you a written estimate, and nothing begins until your family agrees to it.</p>
+
+    <h2>Before we talk</h2>
+    <p>It helps, but is not required, to have these to hand:</p>
+    <ul>
+      <li>The address of the home and who is responsible for access to it</li>
+      <li>Which family member has the authority to make decisions</li>
+      <li>Any dates that matter, such as a listing, a closing or the end of a lease</li>
+      <li>The name of your attorney or advisor, if you have one</li>
+      <li>Any vendors your family has already chosen</li>
+    </ul>
+
+    <h2>Where and in what language</h2>
+    <p>We serve the San Gabriel Valley, including {site.cities.slice(0, -1).join(', ')} and {site.cities[site.cities.length - 1]}. We speak Urdu, Hindi, Memoni and English. If your family needs another language, tell us on the call and we will say straight away whether we can match it.</p>
+
+    <h2>Questions</h2>
+    <p><strong>Can you be at the home when no one in the family can?</strong><br />Yes, with written authorization from the family member responsible. A family member or named person is responsible for access to the home.</p>
+    <p><strong>Do you work with our attorney?</strong><br />Yes. We do not replace one, and we can point you toward local resources if you need to find one.</p>
+    <p><strong>Do we have to be Muslim?</strong><br />No. Families of any faith are welcome, and we follow your family's customs and timing as you direct.</p>
+    <p><strong>Is this available outside weekends?</strong><br />Visits take place on weekends. We respond to calls and emails during the week, though not at guaranteed times.</p>
+
+    <h2 id="consult">Request a free consultation</h2>
+    <p>Call <a href={site.phoneHref}>{site.phone}</a>, message us on <a href={site.whatsappHref}>WhatsApp</a>, or send the form below and we will call you back.</p>
+
+    <form id="estate-form" data-endpoint={site.formEndpoint} novalidate style="display:grid;gap:var(--leading);margin-top:var(--leading)">
+      <p hidden aria-hidden="true"><label>Leave this field blank<input name="company" tabindex="-1" autocomplete="off" /></label></p>
+      <div class="field">
+        <label for="e-name">Your name</label>
+        <input class="input" id="e-name" name="name" required autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="e-phone">Phone</label>
+        <input class="input" id="e-phone" name="phone" type="tel" required autocomplete="tel" />
+      </div>
+      <div class="field">
+        <label for="e-email">Email (optional)</label>
+        <input class="input" id="e-email" name="email" type="email" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="e-size">Size of the project</label>
+        <select class="input" id="e-size" name="hours">
+          <option>A few tasks, such as one vendor or organizing papers</option>
+          <option>A home to settle over a few weeks</option>
+          <option>A full home with many vendors or a longer timeline</option>
+          <option selected>Not sure yet</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="e-need">Tell us about the home and timing</label>
+        <textarea class="input" id="e-need" name="need" rows="4" style="resize:vertical;font-family:var(--font-body);line-height:24px"></textarea>
+        <span style="font-size:13px;line-height:22px">Please do not include legal, financial or medical details here. We will go over those on the call.</span>
+      </div>
+      <p id="e-error" role="alert" hidden style="margin:0;color:var(--color-accent-700);font-size:15px">Please add your name and a phone number so we can call you back.</p>
+      <div><button type="submit" class="btn btn-primary" style="font-size:16px;padding:12px 22px">Request a consultation</button></div>
+    </form>
+
+    <p style="font-size:14px;color:color-mix(in srgb,var(--color-text) 55%,transparent);margin-top:calc(1.6*var(--leading))">Apna is not a law, tax, financial or estate-planning firm, and does not act as executor, trustee or agent for any family. <a href="/">Back to Apna Senior Concierge</a> · <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a></p>
+  </main>
+  <script is:inline>
+    (function () {
+      var form = document.getElementById('estate-form');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var hp = form.querySelector('[name="company"]');
+        if (hp && hp.value) { window.location.href = '/thank-you/'; return; }
+        var f = Object.fromEntries(new FormData(form).entries());
+        delete f.company;
+        var err = document.getElementById('e-error');
+        if (!f.name || !f.name.trim() || !f.phone || !f.phone.trim()) { err.hidden = false; return; }
+        err.hidden = true;
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        f.relationship = 'Estate Transition Concierge';
+        f.need = 'Project size: ' + f.hours + '.' + (f.need && f.need.trim() ? ' ' + f.need.trim() : '');
+        delete f.hours;
+        fetch(form.dataset.endpoint || '/api/booking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(f)
+        }).then(function (r) {
+          if (r.ok) { window.location.href = '/thank-you/'; }
+          else { btn.disabled = false; err.textContent = 'Something went wrong. Please call us instead.'; err.hidden = false; }
+        }).catch(function () {
+          btn.disabled = false; err.textContent = 'Something went wrong. Please call us instead.'; err.hidden = false;
+        });
+      });
+    })();
+  </script>
+</Layout>

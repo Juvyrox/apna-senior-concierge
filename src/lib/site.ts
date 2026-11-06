@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 // Single source of truth for business facts + SEO defaults.
 // Edit values here and every page updates.
-// Figures below are the canonical facts (Reconciliation doc, 2026-09-08).
+// Figures below follow the Apna Master Doc.
 // ─────────────────────────────────────────────────────────────
 
 export const site = {
@@ -29,13 +29,18 @@ export const site = {
     'San Gabriel', 'Alhambra', 'Covina', 'West Covina', 'Azusa', 'Glendora',
   ],
 
-  // Plans — canonical: Chai 2h / Dawat 4h / Ghar 6h. Rate starts at $50/hr
-  // and varies by what the family needs — not published as a fixed price.
-  rateHourly: 'Starts at $50/hr',
+  // Plans — Chai 2h / Dawat 4h / Ghar 8h a week. Hourly rate is the same
+  // whatever the task; it is set in the written agreement.
+  // Public rate. First five families are offered $50/hr for their first year;
+  // remove foundingNote once those five places are taken. See Master Doc.
+  rateHourly: '$60 an hour',
+  // Estate Transition Concierge: public starting rate; total depends on project size.
+  estateRate: 'From $100 an hour',
+  foundingNote: 'Our first five families are offered $50 an hour for their first year.',
   plans: {
     chai: { hours: '2 hours a week' },
     dawat: { hours: '4 hours a week' },
-    ghar: { hours: '6 hours a week' },
+    ghar: { hours: '8 hours a week' },
   },
 
   // ── Booking form delivery (host-agnostic — no Netlify Forms) ──

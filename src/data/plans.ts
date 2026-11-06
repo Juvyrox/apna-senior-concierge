@@ -17,7 +17,7 @@ export const plans: Plan[] = [
   {
     slug: 'chai',
     name: 'Chai',
-    hoursLabel: '2 hours a weekend',
+    hoursLabel: '2 hours a week',
     description: "A good starting point if your parent mostly needs company and a hand with small errands.",
     featuresHeader: 'Includes',
     features: [
@@ -30,7 +30,7 @@ export const plans: Plan[] = [
   {
     slug: 'dawat',
     name: 'Dawat',
-    hoursLabel: '4 hours a weekend',
+    hoursLabel: '4 hours a week',
     badge: 'Most families',
     highlighted: true,
     description: "The one most families land on, once driving and a longer visit come into the picture.",
@@ -45,11 +45,11 @@ export const plans: Plan[] = [
   {
     slug: 'ghar',
     name: 'Ghar',
-    hoursLabel: '6 hours in a day',
+    hoursLabel: '8 hours a week',
     description: "Built for families farther away, or when one person has been carrying all of it alone.",
     featuresHeader: 'Everything in Dawat, plus',
     features: [
-      { text: 'One full day, in one visit or two' },
+      { text: 'A full day each weekend, in one visit or two' },
       { text: 'We make room for last-minute changes' },
       { text: 'A regular outing during the day, such as the masjid or a park' },
     ],
