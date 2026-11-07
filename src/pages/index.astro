@@ -611,4 +611,27 @@ import { team } from '../data/team';
       });
     }
   </script>
+  <script is:inline>
+    // Highlight the nav link for the section currently on screen.
+    (function () {
+      var ids = ['help', 'plans', 'about', 'questions', 'book'];
+      var items = ids.map(function (id) {
+        return { el: document.getElementById(id), link: document.querySelector('.nav a[href="#' + id + '"]') };
+      }).filter(function (x) { return x.el && x.link; });
+      var queued = false;
+      function update() {
+        queued = false;
+        var active = null;
+        items.forEach(function (x) { if (x.el.getBoundingClientRect().top <= 140) active = x; });
+        items.forEach(function (x) {
+          if (x === active) x.link.setAttribute('aria-current', 'location');
+          else x.link.removeAttribute('aria-current');
+        });
+      }
+      function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('hashchange', onScroll);
+      update();
+    })();
+  </script>
 </Layout>
