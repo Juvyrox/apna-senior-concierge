@@ -13,7 +13,7 @@ import { site } from '../lib/site';
         <a class="btn btn-primary" href="/" style="font-size:16px;padding:12px 22px">Back to home</a>
         <a class="btn btn-ghost" href="/#book" style="font-size:16px">Book a free call</a>
       </div>
-      <p style="font-size:15px;line-height:24px;margin:calc(1.4*var(--leading)) 0 0;color:color-mix(in srgb,var(--color-text) 70%,transparent)">Or reach us directly at <a href={`mailto:${site.email}`}>{site.email}</a> · <a href={site.phoneHref}>{site.phone}</a></p>
+      <p style="font-size:15px;line-height:24px;margin:calc(1.4*var(--leading)) 0 0;color:color-mix(in srgb,var(--color-text) 70%,transparent)">Or reach us directly at {site.emailLive && (<><a href={`mailto:${site.email}`}>{site.email}</a> · </>)}<a href={site.phoneHref}>{site.phone}</a></p>
     </div>
   </main>
 </Layout>

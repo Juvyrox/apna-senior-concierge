@@ -27,7 +27,7 @@ export const faq: FaqItem[] = [
   {
     question: 'What if my parents speak a different language?',
     answer:
-      "We speak Urdu, Hindi, Memoni and English. If your parent speaks something else, mention it on the call and we'll tell you straight away whether we can match it.",
+      "We speak Urdu, Hindi and English, and we understand Memoni. If your parent speaks something else, mention it on the call and we'll tell you straight away whether we can match it.",
   },
   {
     question: 'What hours can you visit?',

@@ -11,6 +11,10 @@ type CloudflareEnv = {
   // Comma-separated list of emails allowed to see /portal/admin.
   // Change this in Cloudflare → Settings → Variables — no code change needed.
   ADMIN_EMAILS: string;
+  // Optional: email alert when an inquiry arrives (see src/pages/api/booking.ts).
+  RESEND_API_KEY?: string;
+  NOTIFY_EMAIL?: string;
+  NOTIFY_FROM?: string;
 };
 
 declare namespace App {

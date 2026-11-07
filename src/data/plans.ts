@@ -36,7 +36,7 @@ export const plans: Plan[] = [
     description: "The one most families land on, once driving and a longer visit come into the picture.",
     featuresHeader: 'Everything in Chai, plus',
     features: [
-      { text: 'Driving included, in our own car' },
+      { text: 'Driving included, with the same person at the wheel' },
       { text: 'One visit or two, as you prefer' },
       { text: 'We stay with them throughout' },
     ],

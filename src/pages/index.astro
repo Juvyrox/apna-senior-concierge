@@ -46,7 +46,7 @@ import { team } from '../data/team';
         <div style="margin-top:calc(1.5*var(--leading))">
           <p style="font-family:var(--font-heading);font-style:italic;font-size:22px;line-height:1.5;margin:0 0 18px;max-width:52ch;color:var(--green)">When you can't be there yourself, this is what you'd want in your place.</p>
           <p style="font-size:19px;line-height:var(--leading);margin:0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Apna is a concierge service for older adults in the San Gabriel Valley. We offer companionship, errands and transportation assistance, and we stay for as long as the visit requires.</p>
-          <p style="font-size:17px;line-height:28px;margin:var(--leading) 0 0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">We currently offer Urdu, Hindi, English and Memoni. We are working to add more languages as families ask for them.</p>
+          <p style="font-size:17px;line-height:28px;margin:var(--leading) 0 0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">We speak Urdu, Hindi and English, and we understand Memoni. We are working to add more languages as families ask for them.</p>
           <p style="font-size:15px;line-height:23px;margin:18px 0 0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 78%,transparent)">Started by a granddaughter who remembers what her own family needed. <a href="#about">Read the story &rarr;</a></p>
         </div>
       </section>
@@ -285,9 +285,9 @@ import { team } from '../data/team';
           </div>
 
           <noscript>
-            <p style="font-size:17px;line-height:28px;margin:0 0 var(--leading);padding:12px 14px;border:1px solid var(--color-divider);border-radius:var(--radius-md)">To book a free call, email <a href={`mailto:${site.email}`}>{site.email}</a>, call <a href={site.phoneHref}>{site.phone}</a>, or message on <a href={site.whatsappHref} target="_blank" rel="noopener">WhatsApp</a>. Tell us who it's for, your city, and the best time and language to reach you.</p>
+            <p style="font-size:17px;line-height:28px;margin:0 0 var(--leading);padding:12px 14px;border:1px solid var(--color-divider);border-radius:var(--radius-md)">To book a free call, {site.emailLive && (<>email <a href={`mailto:${site.email}`}>{site.email}</a>, </>)}call <a href={site.phoneHref}>{site.phone}</a>, or message on <a href={site.whatsappHref} target="_blank" rel="noopener">WhatsApp</a>. Tell us who it's for, your city, and the best time and language to reach you.</p>
           </noscript>
-          <form name="booking" method="POST" id="booking-form" novalidate data-endpoint={site.formEndpoint} data-email={site.email}>
+          <form name="booking" method="POST" id="booking-form" novalidate data-endpoint={site.formEndpoint} data-email={site.emailLive ? site.email : ''} data-phone={site.phone}>
             <p hidden aria-hidden="true"><label>Leave this field blank<input name="company" tabindex="-1" autocomplete="off" /></label></p>
 
             <!-- STEP 1 -->
@@ -416,7 +416,7 @@ import { team } from '../data/team';
                   <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:6px">
                     <label class="radio" style="cursor:pointer"><input type="radio" name="language" value="Urdu" checked /><span class="dot"></span>Urdu</label>
                     <label class="radio" style="cursor:pointer"><input type="radio" name="language" value="English" /><span class="dot"></span>English</label>
-                    <label class="radio" style="cursor:pointer"><input type="radio" name="language" value="Memoni" /><span class="dot"></span>Memoni</label>
+                    <label class="radio" style="cursor:pointer"><input type="radio" name="language" value="Hindi" /><span class="dot"></span>Hindi</label>
                     <label class="radio" style="cursor:pointer"><input type="radio" name="language" value="Either" /><span class="dot"></span>Either</label>
                   </div>
                 </div>
@@ -461,7 +461,7 @@ import { team } from '../data/team';
         <p style="margin:0"><a href="/privacy/" style="color:var(--color-accent-700)">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms/" style="color:var(--color-accent-700)">Terms of Service</a></p>
       </div>
       <div style="display:flex;flex-direction:column;gap:7px">
-        <a href={`mailto:${site.email}`} style="text-decoration:none">{site.email}</a>
+        {site.emailLive && <a href={`mailto:${site.email}`} style="text-decoration:none">{site.email}</a>}
         <a href={site.phoneHref} style="text-decoration:none">{site.phone}</a>
       </div>
     </div>
@@ -573,14 +573,30 @@ import { team } from '../data/team';
 
         if (endpoint) {
           // Automatic delivery to a configured endpoint (e.g. a Supabase function).
+          let failed = false;
           try {
-            await fetch(endpoint, {
+            const res = await fetch(endpoint, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(fields),
             });
+            if (!res.ok) failed = true;
           } catch (err) {
-            // Don't trap the user if the network hiccups — still confirm.
+            failed = true;
+          }
+          if (failed) {
+            // Never tell a family it worked when it did not.
+            submitBtn && (submitBtn.disabled = false);
+            let err = form.querySelector('[data-submit-error]');
+            if (!err) {
+              err = document.createElement('p');
+              err.setAttribute('data-submit-error', '');
+              err.setAttribute('role', 'alert');
+              err.style.cssText = 'margin:12px 0 0;font-size:15px;line-height:23px;color:var(--color-accent-700)';
+              (submitBtn ? submitBtn.parentElement : form).appendChild(err);
+            }
+            err.textContent = 'Sorry, something went wrong and your request was not sent. Please call or text us at ' + (form.dataset.phone || '') + ' and we will take it from there.';
+            return;
           }
         } else if (contactEmail) {
           // No endpoint configured: open the visitor's mail app, pre-filled.

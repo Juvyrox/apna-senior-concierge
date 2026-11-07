@@ -14,10 +14,16 @@ export const site = {
 
   // Canonical production domain. Single source of truth for canonical tags,
   // sitemap, robots.txt, login and Stripe redirects.
-  url: 'https://apnaseniorconcierge.com',
+  // TEMPORARY: the apnaseniorconcierge.com domain is not bought or connected yet,
+  // so canonical tags and the sitemap point at the live address. Switch this to
+  // 'https://apnaseniorconcierge.com' on the day the domain goes live.
+  url: 'https://apna-senior-concierge.skyscaper1.workers.dev',
 
   // Contact
   email: 'info@apnaseniorconcierge.com',
+  // Set true only once mail to the address above actually arrives. While false,
+  // pages show the phone number instead of the email address.
+  emailLive: false,
   phone: '(510) 437-0136',
   phoneHref: 'tel:+15104370136',
   whatsappHref: 'https://wa.me/15104370136',
@@ -58,7 +64,7 @@ export const site = {
   plausibleDomain: '',
 
   // Legal
-  lastUpdated: 'September 9, 2026',
+  lastUpdated: 'November 7, 2026',
 } as const;
 
 export type Site = typeof site;

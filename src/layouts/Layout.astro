@@ -28,7 +28,7 @@ const jsonLd = {
   name: site.name,
   description: site.description,
   url: Astro.site?.href,
-  email: site.email,
+  ...(site.emailLive ? { email: site.email } : {}),
   telephone: site.phone,
   founder: { '@type': 'Person', name: site.founder },
   areaServed: [site.region, ...site.cities.map((c) => `${c}, CA`)],

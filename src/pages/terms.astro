@@ -14,7 +14,7 @@ const description = `The terms for using the Apna Senior Concierge website and u
     <p class="lead">These terms cover your use of this website and explain, in plain language, what Apna Senior Concierge does and does not provide. The actual service is governed by a separate written service agreement signed before any standing visits begin.</p>
 
     <h2>1. About Apna</h2>
-    <p>Apna Senior Concierge is a non-medical senior concierge and companion service in the {site.region}, founded by {site.founder}. Contact: <a href={`mailto:${site.email}`}>{site.email}</a>, <a href={site.phoneHref}>{site.phone}</a>.</p>
+    <p>Apna Senior Concierge is a non-medical senior concierge and companion service in the {site.region}, founded by {site.founder}. Contact: {site.emailLive ? <><a href={`mailto:${site.email}`}>{site.email}</a>, <a href={site.phoneHref}>{site.phone}</a></> : P}.</p>
 
     <h2>2. What our service is, and is not</h2>
     <p>Apna provides companionship, errands, grocery support, appointment accompaniment, transportation assistance as part of hourly companion visits, technology help, and family communication.</p>
@@ -45,8 +45,7 @@ const description = `The terms for using the Apna Senior Concierge website and u
     <p>We may update these terms; the date above shows the latest version. Continued use of the website after changes means you accept the updated terms.</p>
 
     <h2>11. Contact</h2>
-    <p>Questions about these terms? Email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}>{site.phone}</a>.</p>
+    <p>Questions about these terms? {site.emailLive ? <>Email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}>{site.phone}</a></> : <>Call or text us at <a href={site.phoneHref}>{site.phone}</a></>}.</p>
 
-    <p style="font-size:14px;color:color-mix(in srgb,var(--color-text) 55%,transparent);margin-top:calc(1.6*var(--leading))">These terms are a starting template and are not legal advice. Please have them, and your written service agreement, reviewed by a qualified California attorney before relying on them.</p>
   </main>
 </Layout>

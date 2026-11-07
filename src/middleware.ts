@@ -43,7 +43,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     // A genuine unexpected failure (DB unreachable, etc). No internals
     // leaked to the visitor — Cloudflare's own logs still have the detail.
     return new Response(
-      `Something went wrong loading the portal. Try refreshing, or reach us at ${site.email}.`,
+      `Something went wrong loading the portal. Try refreshing, or reach us at ${site.emailLive ? site.email : site.phone}.`,
       { status: 200, headers: { 'Content-Type': 'text/plain' } }
     );
   }

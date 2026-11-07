@@ -58,7 +58,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
     )}
 
     {!client && (
-      <p style="font-size:17px;line-height:26px">We don't have a client record linked to this email yet. If you've just booked with Apna, this will appear shortly. Otherwise, reach out at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <p style="font-size:17px;line-height:26px">We don't have a client record linked to this email yet. If you've just booked with Apna, this will appear shortly. Otherwise, reach out at {site.emailLive ? <a href={`mailto:${site.email}`}>{site.email}</a> : <a href={site.phoneHref}>{site.phone}</a>}.</p>
     )}
 
     {client && (

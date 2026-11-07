@@ -42,7 +42,7 @@ try {
         </div>
         {errorMsg && <p style="color:var(--color-accent-700);font-size:15px;margin:0">{errorMsg}</p>}
         <button type="submit" class="btn btn-primary">Send sign-in link</button>
-        <p style="font-size:14px;line-height:20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No password. We email you a one-time link. Use the same email Apna has on file for you. Reach us directly at <a href={`mailto:${site.email}`}>{site.email}</a> if anything's urgent.</p>
+        <p style="font-size:14px;line-height:20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No password. We email you a one-time link. Use the same email Apna has on file for you. Reach us directly at {site.emailLive ? <a href={`mailto:${site.email}`}>{site.email}</a> : <a href={site.phoneHref}>{site.phone}</a>} if anything's urgent.</p>
       </form>
     )}
   </main>
