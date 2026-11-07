@@ -91,6 +91,37 @@ const jsonLd = {
     <a class="skip-link" href="#main">Skip to content</a>
     <slot />
 
+    <!-- Selects marked data-other show a text box when that option is chosen -->
+    <script is:inline>
+      (function () {
+        document.querySelectorAll('select[data-other]').forEach(function (sel) {
+          var trigger = sel.getAttribute('data-other');
+          var opt = Array.prototype.find.call(sel.options, function (o) { return o.text.trim() === trigger; });
+          if (!opt) return;
+          var base = opt.text;
+          var box = document.createElement('input');
+          box.type = 'text';
+          box.className = 'input';
+          box.placeholder = 'Please tell us';
+          box.maxLength = 200;
+          box.hidden = true;
+          box.style.marginTop = '8px';
+          var lab = sel.id && document.querySelector('label[for="' + sel.id + '"]');
+          box.setAttribute('aria-label', 'Please describe' + (lab ? ': ' + lab.textContent.trim() : ''));
+          sel.insertAdjacentElement('afterend', box);
+          function sync() {
+            var on = sel.selectedOptions[0] === opt;
+            box.hidden = !on;
+            var t = box.value.trim();
+            opt.value = on && t ? base + ': ' + t : base;
+          }
+          sel.addEventListener('change', sync);
+          box.addEventListener('input', sync);
+          if (sel.form) sel.form.addEventListener('reset', function () { setTimeout(function () { box.value = ''; sync(); }, 0); });
+        });
+      })();
+    </script>
+
     <!-- Cookie / privacy notice (cookieless by default; honest, dismissible) -->
     <div id="cookie-banner" class="cookie-banner" hidden>
       <div class="cookie-banner__inner">
