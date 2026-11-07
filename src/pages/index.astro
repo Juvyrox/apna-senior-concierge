@@ -15,7 +15,7 @@ import { team } from '../data/team';
     </a>
     <a href="#help" style="white-space:nowrap;font-size:15px;text-decoration:none">What we do</a>
     <a href="#plans" style="white-space:nowrap;font-size:15px;text-decoration:none">Plans</a>
-    <a href="/estate-transition/" style="white-space:nowrap;font-size:15px;text-decoration:none">Estate Transition</a>
+    <a href="#estate" style="white-space:nowrap;font-size:15px;text-decoration:none">Estate Transition</a>
     <a href="#about" style="white-space:nowrap;font-size:15px;text-decoration:none">About</a>
     <a href="#questions" style="white-space:nowrap;font-size:15px;text-decoration:none">FAQ</a>
     <a href="/portal/login" style="white-space:nowrap;font-size:15px;text-decoration:none;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Client portal</a>
@@ -75,7 +75,6 @@ import { team } from '../data/team';
             </div>
           ))}
         </div>
-        <p style="font-size:17px;line-height:28px;margin:calc(1.2*var(--leading)) 0 0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)"><strong style="font-weight:600">Estate Transition Concierge.</strong> Help for your family when a parent's home changes hands. <a href="/estate-transition/" style="color:var(--color-accent-700)">Learn more</a>.</p>
       </section>
 
       <hr class="hr" />
@@ -189,6 +188,23 @@ import { team } from '../data/team';
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Salah</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Visits are planned around prayer times. If we are out, we find a clean place to pray and wait.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Adab of the house</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">We take our shoes off at the door, address elders with respect and leave the kitchen as we found it.</p></div>
           <div style="border-top:1px solid var(--color-divider);padding:16px 0"><h3 style="font-family:var(--font-heading);font-weight:400;font-size:19px;margin:0 0 5px">Asking is the hard part</h3><p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Many elders were not raised to ask for help. We do not make anyone repeat a request, and we do not make it awkward.</p></div>
+        </div>
+      </section>
+
+      <hr class="hr" />
+
+      <section id="estate" aria-label="Estate Transition Concierge" style="padding:calc(2.5*var(--leading)) 0;scroll-margin-top:76px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:calc(1.5*var(--leading)) clamp(32px,6vw,88px);align-items:start">
+        <div>
+          <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Estate Transition Concierge</p>
+          <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.25;margin:0;max-width:20ch">Help for your family when a parent's home changes hands.</h2>
+        </div>
+        <div>
+          <p style="font-size:17px;line-height:var(--leading);margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">When a parent passes, moves or downsizes, the home still needs attention while the family is already carrying a great deal. We handle the logistics: a task list and timeline, vendors you choose, papers organized into labeled folders, calls in your parent's language, and a written update after every visit.</p>
+          <p style="font-size:17px;line-height:var(--leading);margin:14px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">{site.estateRate}, depending on the size of the project. The first consultation is free.</p>
+          <div style="margin-top:calc(1.1*var(--leading));display:flex;gap:14px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="/estate-transition/#consult" style="font-size:16px;padding:12px 22px">Ask about estate transition</a>
+            <a class="btn btn-ghost" href="/estate-transition/" style="font-size:16px">Read the details</a>
+          </div>
         </div>
       </section>
     </div>
@@ -614,7 +630,7 @@ import { team } from '../data/team';
   <script is:inline>
     // Highlight the nav link for the section currently on screen.
     (function () {
-      var ids = ['help', 'plans', 'about', 'questions', 'book'];
+      var ids = ['help', 'plans', 'estate', 'about', 'questions', 'book'];
       var items = ids.map(function (id) {
         return { el: document.getElementById(id), link: document.querySelector('.nav a[href="#' + id + '"]') };
       }).filter(function (x) { return x.el && x.link; });
