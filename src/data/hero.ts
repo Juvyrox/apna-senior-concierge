@@ -8,5 +8,5 @@ export const hero = {
   subhead:
     'Companions who speak your parents’ language, across the San Gabriel Valley.',
   ctaPrimary: { label: 'Book a free call', href: '#book' },
-  ctaSecondary: { label: 'See what we do', href: '#help' },
+  ctaSecondary: { label: 'See what I do', href: '#help' },
 };

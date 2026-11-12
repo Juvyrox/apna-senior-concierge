@@ -33,16 +33,16 @@ if (Astro.request.method === 'POST' && client) {
   }
 }
 ---
-<Layout title={`Request a visit — ${site.name}`} noindex={true}>
+<Layout title={`Request a visit | ${site.name}`} noindex={true}>
   <PortalHeader backHref="/portal" backLabel="Your account" />
   <main style="max-width:480px;margin:60px auto 100px;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 8px">Request a visit</h1>
     <p style="font-size:16px;line-height:24px;color:color-mix(in srgb,var(--color-text) 88%,transparent);margin:0 0 24px">
-      This isn't confirmed until we reach back out. Visits happen on weekends, minimum two hours, so tell us what works and we'll do our best to match it.
+      This is not confirmed until I reach back to you. Visits happen on weekends, with a two-hour minimum. Tell me what works and I will do my best to match it.
     </p>
 
     {submitted ? (
-      <p style="font-size:17px;line-height:26px">Sent. We'll confirm the time with you shortly.</p>
+      <p style="font-size:17px;line-height:26px">Sent. I'll confirm the time with you shortly.</p>
     ) : (
       <form method="POST" style="display:flex;flex-direction:column;gap:16px">
         <div class="field">
@@ -68,7 +68,7 @@ if (Astro.request.method === 'POST' && client) {
         </div>
         <div class="field">
           <label for="notes">Anything to add</label>
-          <textarea class="input" id="notes" name="notes" rows="3" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything we should know about this visit"></textarea>
+          <textarea class="input" id="notes" name="notes" rows="3" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything I should know about this visit"></textarea>
         </div>
         {errorMsg && <p style="color:var(--color-accent-700);font-size:15px;margin:0">{errorMsg}</p>}
         <button type="submit" class="btn btn-primary">Send request</button>

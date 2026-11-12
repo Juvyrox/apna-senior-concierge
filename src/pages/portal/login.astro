@@ -25,15 +25,15 @@ try {
     }
   }
 } catch {
-  errorMsg = "Something went wrong on our end. Try again, or reach us directly.";
+  errorMsg = "Something went wrong on my end. Please try again, or call me.";
 }
 ---
-<Layout title={`Client portal — ${site.name}`} noindex={true}>
+<Layout title={`Client portal | ${site.name}`} noindex={true}>
   <PortalHeader showSignOut={false} />
   <main style="max-width:420px;margin:80px auto;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:28px;margin:0 0 8px">Client portal</h1>
     {sent ? (
-      <p style="font-size:17px;line-height:26px">Check your email. We sent a sign-in link to that address. It expires shortly, so use it soon.</p>
+      <p style="font-size:17px;line-height:26px">Check your email. I sent a sign-in link to that address. It expires soon, so please use it right away.</p>
     ) : (
       <form method="POST" style="display:flex;flex-direction:column;gap:14px;margin-top:20px">
         <div class="field">
@@ -42,7 +42,7 @@ try {
         </div>
         {errorMsg && <p style="color:var(--color-accent-700);font-size:15px;margin:0">{errorMsg}</p>}
         <button type="submit" class="btn btn-primary">Send sign-in link</button>
-        <p style="font-size:14px;line-height:20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">No password. We email you a one-time link. Use the same email Apna has on file for you. Reach us directly at {site.emailLive ? <a href={`mailto:${site.email}`}>{site.email}</a> : <a href={site.phoneHref}>{site.phone}</a>} if anything's urgent.</p>
+        <p style="font-size:14px;line-height:20px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">There is no password. I email you a one-time link, so use the email address Apna has on file for you. If something is urgent, reach me at {site.emailLive ? <a href={`mailto:${site.email}`}>{site.email}</a> : <a href={site.phoneHref}>{site.phone}</a>}.</p>
       </form>
     )}
   </main>

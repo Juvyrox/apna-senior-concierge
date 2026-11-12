@@ -26,7 +26,7 @@ if (client && Astro.request.method === 'POST') {
       .update({ status: 'cancelled' })
       .eq('id', String(cancelId))
       .eq('client_id', client.id);
-    cancelMsg = error ? 'Could not cancel. Try again or call us.' : 'Request cancelled.';
+    cancelMsg = error ? 'Could not cancel. Please try again or call me.' : 'Request cancelled.';
   }
 }
 
@@ -44,7 +44,7 @@ if (client) {
 const money = (n: number) => `$${Number(n).toFixed(2)}`;
 const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) => sum + Number(i.amount), 0);
 ---
-<Layout title={`Your account — ${site.name}`} noindex={true}>
+<Layout title={`Your account | ${site.name}`} noindex={true}>
   <PortalHeader />
   <main style="max-width:720px;margin:60px auto 100px;padding:0 20px">
     <div style="margin-bottom:32px">
@@ -58,7 +58,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
     )}
 
     {!client && (
-      <p style="font-size:17px;line-height:26px">We don't have a client record linked to this email yet. If you've just booked with Apna, this will appear shortly. Otherwise, reach out at {site.emailLive ? <a href={`mailto:${site.email}`}>{site.email}</a> : <a href={site.phoneHref}>{site.phone}</a>}.</p>
+      <p style="font-size:17px;line-height:26px">I do not have a client record linked to this email yet. If you have just booked with Apna, it will appear soon. Otherwise, reach me at {site.emailLive ? <a href={`mailto:${site.email}`}>{site.email}</a> : <a href={site.phoneHref}>{site.phone}</a>}.</p>
     )}
 
     {client && (
@@ -126,7 +126,7 @@ const outstanding = invoices.filter((i) => i.status !== 'paid').reduce((sum, i) 
                 )}
               </div>
             ))}
-            <p style="font-size:13.5px;color:color-mix(in srgb,var(--color-text) 78%,transparent);margin:10px 0 0">Cancelling close to a confirmed visit may not always be possible. Call us directly if it's within a day.</p>
+            <p style="font-size:13.5px;color:color-mix(in srgb,var(--color-text) 78%,transparent);margin:10px 0 0">Within 24 hours of a visit, please call me instead of cancelling here.</p>
           </section>
         )}
       </>

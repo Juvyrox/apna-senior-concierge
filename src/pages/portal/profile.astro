@@ -31,7 +31,7 @@ if (client && Astro.request.method === 'POST') {
   Object.assign(client, updates);
 }
 ---
-<Layout title={`Your profile — ${site.name}`} noindex={true}>
+<Layout title={`Your profile | ${site.name}`} noindex={true}>
   <PortalHeader backHref="/portal" backLabel="Your account" />
   <main style="max-width:480px;margin:60px auto 100px;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 24px">Your profile</h1>
@@ -53,8 +53,8 @@ if (client && Astro.request.method === 'POST') {
           <input class="input" id="languages" name="languages" value={client.languages || ''} placeholder="Urdu, English" />
         </div>
         <div class="field">
-          <label for="family_preferences">Preferences and notes for us</label>
-          <textarea class="input" id="family_preferences" name="family_preferences" rows="4" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything we should know: routines, things to avoid, what helps">{client.family_preferences || ''}</textarea>
+          <label for="family_preferences">Preferences and notes for me</label>
+          <textarea class="input" id="family_preferences" name="family_preferences" rows="4" style="resize:vertical;font-family:var(--font-body)" placeholder="Anything I should know: routines, things to avoid, what helps">{client.family_preferences || ''}</textarea>
         </div>
         {savedMsg && <p style="font-size:15px;margin:0">{savedMsg}</p>}
         <button type="submit" class="btn btn-primary">Save</button>

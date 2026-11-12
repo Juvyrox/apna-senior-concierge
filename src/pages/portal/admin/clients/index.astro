@@ -37,7 +37,7 @@ const { data: clients } = await admin
   .select('id, name, email, plan_tier, hourly_rate, status, assigned_companion, auth_user_id, created_at')
   .order('created_at', { ascending: false });
 ---
-<Layout title={`Clients — ${site.name}`} noindex={true}>
+<Layout title={`Clients | ${site.name}`} noindex={true}>
   <PortalHeader admin backHref="/portal/admin" backLabel="Admin dashboard" />
   <main style="max-width:640px;margin:60px auto 100px;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 8px">Clients</h1>

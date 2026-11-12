@@ -31,7 +31,7 @@ if (action === 'add') {
 
 const { data: areas } = await admin.from('service_areas').select('*').order('region').order('city');
 ---
-<Layout title={`Service areas — ${site.name}`} noindex={true}>
+<Layout title={`Service areas | ${site.name}`} noindex={true}>
   <PortalHeader admin backHref="/portal/admin" backLabel="Admin dashboard" />
   <main style="max-width:560px;margin:60px auto 100px;padding:0 20px">
     <h1 style="font-family:var(--font-heading);font-weight:400;font-size:26px;margin:0 0 8px">Service areas</h1>

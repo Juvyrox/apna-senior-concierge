@@ -45,7 +45,7 @@ if (client?.city) {
   inArea = !!match;
 }
 ---
-<Layout title={`${client?.name || 'Client'} — ${site.name}`} noindex={true}>
+<Layout title={`${client?.name || 'Client'} | ${site.name}`} noindex={true}>
   <PortalHeader admin backHref="/portal/admin/clients" backLabel="All clients" />
   <main style="max-width:520px;margin:60px auto 100px;padding:0 20px">
     {!client ? (
