@@ -9,7 +9,7 @@ export const site = {
   shortName: 'Apna',
   tagline: "Your parents shouldn't have to explain themselves in English.",
   description:
-    'Non-medical companionship, errands and transportation assistance for older adults in the San Gabriel Valley, with companions who speak your parents’ language.',
+    'Weekend companionship and help with errands for older adults in the San Gabriel Valley, from someone who speaks your parents’ language. Non-medical.',
   founder: 'Juveriyah Salat',
 
   // Canonical production domain. Single source of truth for canonical tags,
@@ -43,6 +43,8 @@ export const site = {
   // Estate Transition Concierge: public starting rate; total depends on project size.
   estateRate: 'From $100 an hour',
   foundingNote: 'Our first five families are offered $50 an hour for their first year.',
+  // Shown above the headline while Apna is not yet open. Set to '' once visits begin.
+  launchNote: 'Opening to our first five families soon',
   plans: {
     chai: { hours: '2 hours a week' },
     dawat: { hours: '4 hours a week' },
@@ -64,7 +66,7 @@ export const site = {
   plausibleDomain: '',
 
   // Legal
-  lastUpdated: 'November 7, 2026',
+  lastUpdated: 'November 12, 2026',
 } as const;
 
 export type Site = typeof site;
