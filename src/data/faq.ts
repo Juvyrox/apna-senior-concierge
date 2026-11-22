@@ -12,7 +12,7 @@ export const faq: FaqItem[] = [
   {
     question: 'Are you taking families now?',
     answer:
-      'Apna is opening to its first five families soon. Send the form and I will call you, and I will give you a start date as soon as I have one.',
+      'I am opening to my first five families soon. Send the form and I will call you, and I will give you a start date as soon as I have one.',
   },
   {
     question: "My parent says they don't need help.",
