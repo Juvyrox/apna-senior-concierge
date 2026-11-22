@@ -457,3 +457,16 @@ a:hover { color: var(--green-deep); }
   .sec { padding-block: 48px; }
   .card { padding: 22px; }
 }
+
+
+/* Footer */
+.foot { background: color-mix(in srgb, var(--green) 8%, var(--color-bg)); }
+.foot-inner { max-width: 1180px; margin: 0 auto; padding: calc(2*var(--leading)) var(--edge); }
+.foot-top { display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; align-items: baseline; padding-bottom: var(--leading); border-bottom: 1px solid var(--color-divider); }
+.foot-name { margin: 0; font-family: var(--font-heading); font-size: 22px; line-height: 1.2; color: var(--color-text); }
+.foot-sub { margin: 4px 0 0; font-size: 14px; line-height: 22px; color: color-mix(in srgb, var(--color-text) 75%, transparent); }
+.foot-links { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 14px; line-height: 22px; }
+.foot-links a { color: var(--color-accent-700); }
+.foot-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--leading) calc(2*var(--leading)); padding-top: var(--leading); }
+.foot-h { margin: 0 0 6px; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--green); }
+.foot-notes p { margin: 0; font-size: 14px; line-height: 23px; max-width: 46ch; color: color-mix(in srgb, var(--color-text) 85%, transparent); }
