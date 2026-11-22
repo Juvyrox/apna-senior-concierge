@@ -27,7 +27,7 @@ export const faq: FaqItem[] = [
   {
     question: 'Do you drive my parent to places?',
     answer:
-      'Not at the moment. Visits are at home or close by on foot, and I can meet your parent at the masjid, a gathering or an appointment and stay with them. I also pick up groceries and other errands for them.',
+      'Not at the moment. My visits are at home or close by, and I can meet your parent at the masjid, a gathering or an appointment and stay with them. I also pick up groceries and run other errands for them.',
   },
   {
     question: 'My parent uses a wheelchair or a walker. Can you help?',
@@ -72,6 +72,6 @@ export const faq: FaqItem[] = [
   {
     question: 'What if we need to pause or stop?',
     answer:
-      "Tell me and we work it out. The details are in the written agreement.",
+      "Tell me, and we will work it out together. The details are in the written agreement.",
   },
 ];

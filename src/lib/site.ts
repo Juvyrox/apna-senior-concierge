@@ -42,9 +42,9 @@ export const site = {
   rateHourly: '$60 an hour',
   // Estate Transition Concierge: public starting rate; total depends on project size.
   estateRate: 'From $100 an hour',
-  foundingNote: 'Our first five families are offered $50 an hour for their first year.',
+  foundingNote: 'My first five families are offered $50 an hour for their first year.',
   // Shown above the headline while Apna is not yet open. Set to '' once visits begin.
-  launchNote: 'Opening to our first five families soon',
+  launchNote: 'Opening to my first five families soon',
   plans: {
     chai: { hours: '2 hours a week' },
     dawat: { hours: '4 hours a week' },

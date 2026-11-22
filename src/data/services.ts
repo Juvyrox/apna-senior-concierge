@@ -10,11 +10,11 @@ export const services: Service[] = [
   },
   {
     title: 'Mail, forms and phone calls',
-    body: 'Letters read and explained in Urdu or Hindi. Calls to the pharmacy or the bank made together, so nothing is lost along the way.',
+    body: 'I read and explain letters in Urdu or Hindi, and we make calls to the pharmacy or the bank together, so nothing gets lost.',
   },
   {
     title: 'Phones and video calls',
-    body: 'WhatsApp, photos and video calls set up and practised, so family abroad are one tap away.',
+    body: 'I set up WhatsApp, photos and video calls and practise them with your parent, so family abroad are one tap away.',
   },
   {
     title: 'Groceries and errands, brought to the door',
@@ -25,7 +25,7 @@ export const services: Service[] = [
     body: 'Their recipes in their kitchen. I chop, they direct, and we sit down to eat together.',
   },
   {
-    title: 'Meeting them where they are going',
-    body: 'At the masjid, a family gathering or an appointment, I can meet your parent there and stay with them. For now I do not drive clients myself.',
+    title: 'Meeting them at appointments and gatherings',
+    body: 'I can meet your parent at the masjid, a family gathering or an appointment and stay with them. I do not drive clients for now.',
   },
 ];
