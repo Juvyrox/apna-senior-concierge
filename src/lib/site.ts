@@ -37,14 +37,14 @@ export const site = {
 
   // Plans — Chai 2h / Dawat 4h / Ghar 8h a week. Hourly rate is the same
   // whatever the task; it is set in the written agreement.
-  // Public rate. First five families are offered $50/hr for their first year;
-  // remove foundingNote once those five places are taken. See Master Doc.
+  // Public rate. First five families are offered $50/hr for their first year (the public
+  // wording does not say five); remove foundingNote once those places are taken. See Master Doc.
   rateHourly: '$60 an hour',
   // Estate Transition Concierge: public starting rate; total depends on project size.
   estateRate: 'From $100 an hour',
-  foundingNote: 'My first five families are offered $50 an hour for their first year.',
+  foundingNote: 'Families who start early pay $50 an hour for their first year.',
   // Shown above the headline while Apna is not yet open. Set to '' once visits begin.
-  launchNote: 'Opening to my first five families soon',
+  launchNote: '',
   plans: {
     chai: { hours: '2 hours a week' },
     dawat: { hours: '4 hours a week' },
