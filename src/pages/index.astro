@@ -17,7 +17,7 @@ import { team } from '../data/team';
     <a href="#estate" style="white-space:nowrap;font-size:15px;text-decoration:none">Estate Transition</a>
     <a href="#about" style="white-space:nowrap;font-size:15px;text-decoration:none">About</a>
     <a href="#questions" style="white-space:nowrap;font-size:15px;text-decoration:none">FAQ</a>
-    <a href="/portal/login" style="white-space:nowrap;font-size:15px;text-decoration:none;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Client portal</a>
+    <a href="/portal/login" style="white-space:nowrap;font-size:15px;text-decoration:none;color:var(--text-body)">Client portal</a>
     <a class="btn btn-primary" href="#book" style="white-space:nowrap">Book a call</a>
   </nav>
 
@@ -177,7 +177,7 @@ import { team } from '../data/team';
     <section aria-label="Reflection" class="band" style="position:relative;overflow:hidden">
       <div aria-hidden="true" style="position:absolute;inset:0;background-image:var(--tile);background-size:88px 88px;opacity:0.14;pointer-events:none"></div>
       <div class="wrap sec" style="position:relative;text-align:center">
-        <p lang="ar" dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-size:clamp(28px,3.2vw,40px);line-height:2.1;margin:0;color:var(--green-deep);max-width:24ch;margin-inline:auto">وَٱخْفِضْ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحْمَةِ وَقُل رَّبِّ ٱرْحَمْهُمَا كَمَا رَبَّيَانِى صَغِيرًا</p>
+        <p lang="ar" dir="rtl" style="font-family:'Noto Naskh Arabic',serif;font-size:clamp(28px,3.2vw,40px);line-height:2.1;margin:0;color:var(--green);max-width:24ch;margin-inline:auto">وَٱخْفِضْ لَهُمَا جَنَاحَ ٱلذُّلِّ مِنَ ٱلرَّحْمَةِ وَقُل رَّبِّ ٱرْحَمْهُمَا كَمَا رَبَّيَانِى صَغِيرًا</p>
         <p style="font-family:var(--font-heading);font-size:clamp(21px,2.4vw,28px);line-height:1.5;margin:var(--leading) auto 0;max-width:36ch">“And lower to them the wing of humility out of mercy, and say: my Lord, have mercy upon them as they raised me when I was small.”</p>
         <p class="eyebrow" style="margin:18px 0 0">Qur'an 17:24</p>
       </div>
@@ -238,8 +238,8 @@ import { team } from '../data/team';
         <div>
           <p style="display:block;font-size:13px;line-height:14px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin:0 0 14px">Book a free call</p>
           <h2 style="font-family:var(--font-heading);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.2;margin:0;max-width:18ch">Tell me about the week you're trying to cover.</h2>
-          <p style="font-size:17px;line-height:var(--leading);margin:18px 0 0;max-width:44ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Three short steps, about two minutes. I will call you back in the language you prefer. Nothing is booked or charged from this form.</p>
-          <p style="font-size:15px;line-height:23px;margin:var(--leading) 0 0;max-width:40ch;color:color-mix(in srgb,var(--color-text) 88%,transparent);border-left:2px solid var(--green);padding-left:14px">Please do not include medical details here. We can talk about those on the call.</p>
+          <p style="font-size:17px;line-height:var(--leading);margin:18px 0 0;max-width:44ch;color:var(--text-body)">Three short steps, about two minutes. I will call you back in the language you prefer. Nothing is booked or charged from this form.</p>
+          <p style="font-size:15px;line-height:23px;margin:var(--leading) 0 0;max-width:40ch;color:var(--text-body);border-left:2px solid var(--green);padding-left:14px">Please do not include medical details here. We can talk about those on the call.</p>
         </div>
 
         <div style="border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:calc(1.25*var(--leading))">
@@ -289,16 +289,16 @@ import { team } from '../data/team';
                     <option>On their own</option><option>With an arm to hold or a family member's help</option>
                     <option>They would need to be lifted or carried</option>
                   </select>
-                  <span style="font-size:13px;line-height:22px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">This only tells me whether I can help. I am not able to lift, carry or transfer anyone. Please do not add medical details.</span>
+                  <span style="font-size:13px;line-height:22px;color:var(--text-body)">This only tells me whether I can help. I am not able to lift, carry or transfer anyone. Please do not add medical details.</span>
                 </div>
-                <p data-lift-warning hidden style="margin:0;font-size:15px;line-height:23px;color:var(--color-accent-700);border:1px solid var(--color-accent);border-radius:var(--radius-md);padding:12px 14px">Please send it in anyway. On the call I will explain what I can cover and who to contact for the rest.</p>
+                <p data-lift-warning hidden style="margin:0;font-size:15px;line-height:23px;color:var(--color-text);border:1px solid var(--color-accent);border-radius:var(--radius-md);padding:12px 14px">Please send it in anyway. On the call I will explain what I can cover and who to contact for the rest.</p>
                 <div class="field">
                   <span style="font-size:13px;letter-spacing:0.04em">Companion preference</span>
                   <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:6px">
                     <label class="radio" style="cursor:pointer"><input type="radio" name="companion" value="A woman" checked /><span class="dot"></span>A woman</label>
                     <label class="radio" style="cursor:pointer"><input type="radio" name="companion" value="No preference" /><span class="dot"></span>No preference</label>
                   </div>
-                  <p style="font-size:15px;line-height:23px;margin:8px 0 0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">At present, visits are with a woman. If your parent would prefer a man, please tell me on the call.</p>
+                  <p style="font-size:15px;line-height:23px;margin:8px 0 0;color:var(--text-body)">At present, visits are with a woman. If your parent would prefer a man, please tell me on the call.</p>
                 </div>
                 <div><button type="button" class="btn btn-primary" data-next>Next</button></div>
               </div>
@@ -391,7 +391,7 @@ import { team } from '../data/team';
                   <button type="button" class="btn btn-ghost" data-back>Back</button>
                   <button type="submit" class="btn btn-primary" data-submit>Send it</button>
                 </div>
-                <span style="font-size:13px;line-height:22px;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Nothing you write here is shared outside Apna.</span>
+                <span style="font-size:13px;line-height:22px;color:var(--text-body)">Nothing you write here is shared outside Apna.</span>
               </div>
             </div>
 
@@ -400,8 +400,8 @@ import { team } from '../data/team';
               <div style="display:flex;flex-direction:column;gap:14px">
                 <span style="font-size:13px;letter-spacing:0.09em;text-transform:uppercase;color:var(--green)">Sent</span>
                 <p data-thanks style="font-family:var(--font-heading);font-size:26px;line-height:1.3;margin:0">Thank you.</p>
-                <p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">I'll call <span data-shown-phone>you</span>, <span data-shown-when>at a good time</span>. For anything urgent, call or text <a href={site.phoneHref}>{site.phone}</a> and I'll get back to you as soon as I can.</p>
-                <p style="font-size:17px;line-height:28px;margin:0;color:color-mix(in srgb,var(--color-text) 88%,transparent)">The initial thirty-minute consultation is free. Nothing is charged unless you decide to continue.</p>
+                <p style="font-size:17px;line-height:28px;margin:0;color:var(--text-body)">I'll call <span data-shown-phone>you</span>, <span data-shown-when>at a good time</span>. For anything urgent, call or text <a href={site.phoneHref}>{site.phone}</a> and I'll get back to you as soon as I can.</p>
+                <p style="font-size:17px;line-height:28px;margin:0;color:var(--text-body)">The initial thirty-minute consultation is free. Nothing is charged unless you decide to continue.</p>
                 <div><button type="button" class="btn btn-ghost" data-restart>Send another</button></div>
               </div>
             </div>
@@ -413,7 +413,7 @@ import { team } from '../data/team';
 
       <section aria-label="Referrals" style="padding:calc(1.2*var(--leading)) 0 calc(1.6*var(--leading))">
         <p style="display:block;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--green);margin:0 0 10px">Know a family who would benefit?</p>
-        <p style="font-size:16px;line-height:25px;margin:0;max-width:60ch;color:color-mix(in srgb,var(--color-text) 88%,transparent)">Apna grows by word of mouth. If you know a family who would benefit, I would be grateful for an introduction. When a family you introduce becomes a client, you both receive 10% off the hourly rate on companion visits for two months. You are welcome to share <a href={site.url}>{site.url.replace('https://', '')}</a> or <a href={site.phoneHref}>{site.phone}</a>.</p>
+        <p style="font-size:16px;line-height:25px;margin:0;max-width:60ch;color:var(--text-body)">Apna grows by word of mouth. If you know a family who would benefit, I would be grateful for an introduction. When a family you introduce becomes a client, you both receive 10% off the hourly rate on companion visits for two months. You are welcome to share <a href={site.url}>{site.url.replace('https://', '')}</a> or <a href={site.phoneHref}>{site.phone}</a>.</p>
       </section>
     </div>
   </main>
@@ -574,7 +574,7 @@ import { team } from '../data/team';
               err = document.createElement('p');
               err.setAttribute('data-submit-error', '');
               err.setAttribute('role', 'alert');
-              err.style.cssText = 'margin:12px 0 0;font-size:15px;line-height:23px;color:var(--color-accent-700)';
+              err.style.cssText = 'margin:12px 0 0;font-size:15px;line-height:23px;color:var(--color-text)';
               (submitBtn ? submitBtn.parentElement : form).appendChild(err);
             }
             err.textContent = 'Sorry, something went wrong and your request was not sent. Please call or text me at ' + (form.dataset.phone || '') + ' and I will take it from there.';
